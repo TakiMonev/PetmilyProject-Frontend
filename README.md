@@ -4,7 +4,11 @@
   <ol>
     <li>visual studio code 켜기</li>
     <li>넣을 폴더 켜기</li>
-    <li>터미널에서 git clone</li>
+    <li>git clone</li>
   </ol>
-  <li><h3>설정</h3></li>
+  <li><h3>기본 설정</h3></li>
+  <ol>
+    <li>npm install --global expo-cli</li>
+    <li>npm install</li>
+  </ol>
 </ol>
