@@ -8,6 +8,7 @@
   </ol>
   <li><h3>기본 설정</h3></li>
   <ol>
+    <li>cd front</li>
     <li>npm install --global expo-cli</li>
     <li>npm install</li>
   </ol>
