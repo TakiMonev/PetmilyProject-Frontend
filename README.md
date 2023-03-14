@@ -1,4 +1,4 @@
-<h2 style="background-color:skyblue">사전 준비</h2>
+<h2 style="background-color:skyblue;">사전 준비</h2>
 <ol>
   <li><h3>넣을 위치 설정</h3></li>
   <ol>
@@ -14,7 +14,9 @@
   </ol>
 </ol>
 
-<h2>깃허브에 내용 올리는 법</h2>
+<br>
+
+<h2 style="background-color:skyblue;">깃허브에 내용 올리는 법</h2>
 <ol>
   <li>git branch : branch 상황 확인</li>
   <li>git branch 브랜치 이름 : 새로운브랜치 생성</li>
