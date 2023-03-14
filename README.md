@@ -1,4 +1,4 @@
-<h2 style=background-color="skyblue">사전 준비</h2>
+<h2 style="background-color:skyblue">사전 준비</h2>
 <ol>
   <li><h3>넣을 위치 설정</h3></li>
   <ol>
