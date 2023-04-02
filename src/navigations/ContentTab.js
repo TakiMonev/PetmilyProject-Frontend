@@ -6,6 +6,7 @@ import SignInScreen from '../screens/SignInScreen';
 import PetRegister from '../screens/PetRegister';
 import PetInfoScreen from '../screens/PetInfoScreen';
 import React from 'react';
+import PetMainScreen from '../screens/PetMainScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -39,7 +40,7 @@ const ContentTab = () => {
             default:
               iconName = '';
               break;
-          }          
+          }
           return getTabBarIcon({ focused, color, size, name: iconName });
         },
       })}
@@ -51,7 +52,7 @@ const ContentTab = () => {
     >
       <Tab.Screen
         name={ContentRoutes.HOME}
-        component={HomeScreen}
+        component={PetMainScreen}
         options={{
           tabBarVisible: true,
         }}
