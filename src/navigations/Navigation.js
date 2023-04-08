@@ -1,13 +1,13 @@
 import { NavigationContainer } from '@react-navigation/native';
-import AuthStack from './AuthStack';
-import ContentTab from './ContentTab';
+
+import TabStackScreen from './Nest';
 
 const Navigation = () => {
-    return (
-        <NavigationContainer>
-            {<ContentTab />}
-        </NavigationContainer>
-    );
+  return (
+    <NavigationContainer>
+      <TabStackScreen />
+    </NavigationContainer>
+  );
 };
 
 export default Navigation;

@@ -1,26 +1,34 @@
 import { useNavigation } from '@react-navigation/native';
 import { Button, StyleSheet, Text, View } from 'react-native';
 import { AuthRoutes } from '../navigations/routes';
-import Input, { InputTypes, KeyboardTypes, ReturnKeyTypes } from '../components/Input';
-import Input2, { InputTypes2, KeyboardTypes2, ReturnKeyTypes2 } from '../components/Input2';
+import Input, {
+  InputTypes,
+  KeyboardTypes,
+  ReturnKeyTypes,
+} from '../components/Input';
+import Input2, {
+  InputTypes2,
+  KeyboardTypes2,
+  ReturnKeyTypes2,
+} from '../components/Input2';
 import { useState } from 'react';
 import { BLACK } from '../colors';
+import ImagePickerComponent from '../components/ImagePicker';
 
-const SignInScreen = () => {
-  const navigation = useNavigation();
-
-  const [petImg, setPetImg]= useState('');
+const PetRegisterScreen = ({ navigation, route }) => {
+  const [petImg, setPetImg] = useState('');
   const [petName, setPetName] = useState('');
   const [petAge, setPetAge] = useState('');
   const [petInfo, setPetInfo] = useState('');
 
   const handleRegister = () => {
-    // handle register logic here
-  }
+    navigation.navigate('PetMain');
+  };
 
   return (
     <View style={styles.container}>
       <Text style={styles.heading}>펫 등록</Text>
+      <ImagePickerComponent />
       <Input2
         styles={{
           container: { marginBottom: 20, paddingHorizontal: 20 },
@@ -34,8 +42,8 @@ const SignInScreen = () => {
       />
       <Input2
         styles={{
-            container: { marginBottom: 20, paddingHorizontal: 20 },
-            input: { borderWidth: 1 },
+          container: { marginBottom: 20, paddingHorizontal: 20 },
+          input: { borderWidth: 1 },
         }}
         value={petAge}
         onChangeText={(text) => setPetAge(text.trim())}
@@ -58,19 +66,19 @@ const SignInScreen = () => {
         numberOfLines={5}
       />
       <View style={styles.buttonContainer}>
-        <Button 
-            title='Register'
-            color={BLACK}
-            style={buttonStyles.container}
-            onPress={handleRegister}
+        <Button
+          title="Register"
+          color={BLACK}
+          style={buttonStyles.container}
+          onPress={handleRegister}
         />
-        <Button 
-            title='Cancel'
-            color={BLACK}
-            style={[buttonStyles.container, { marginLeft: 10 }]}
-            onPress={() => navigation.goBack()}
+        <Button
+          title="Cancel"
+          color={BLACK}
+          style={[buttonStyles.container, { marginLeft: 10 }]}
+          onPress={() => navigation.goBack()}
         />
-        </View>
+      </View>
     </View>
   );
 };
@@ -94,18 +102,18 @@ const styles = StyleSheet.create({
     marginVertical: 20,
     width: '100%',
     paddingHorizontal: 20,
-  }
+  },
 });
 
 const buttonStyles = StyleSheet.create({
-    container: {
-      flex: 1,
-      marginHorizontal: 20,
-      marginTop: 10,
-    },
-    button: {
-      borderRadius: 8,
-    },
+  container: {
+    flex: 1,
+    marginHorizontal: 20,
+    marginTop: 10,
+  },
+  button: {
+    borderRadius: 8,
+  },
 });
 
-export default SignInScreen;
+export default PetRegisterScreen;

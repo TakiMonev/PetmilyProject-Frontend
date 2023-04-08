@@ -7,10 +7,10 @@ import {
 } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
-const AddpetScreen = ({ navigation, route }) => {
+const InitPhotoScreen = ({ navigation, route }) => {
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={() => navigation.navigate('RegisterPet')}>
+      <TouchableOpacity onPress={() => navigation.navigate('AddPhoto')}>
         <MaterialCommunityIcons
           name="plus-circle-outline"
           size={50}
@@ -18,7 +18,7 @@ const AddpetScreen = ({ navigation, route }) => {
           margin={15}
         />
       </TouchableOpacity>
-      <Text style={styles.text}>펫 추가하기</Text>
+      <Text style={styles.text}>사진 등록하기</Text>
     </View>
   );
 };
@@ -35,4 +35,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AddpetScreen;
+export default InitPhotoScreen;
