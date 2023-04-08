@@ -13,7 +13,9 @@ export default function PetInfoScreen() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://ec2-43-201-21-193.ap-northeast-2.compute.amazonaws.com:8080/users/fetchAll');
+        const response = await fetch(
+          'http://ec2-43-201-21-193.ap-northeast-2.compute.amazonaws.com:8080/users/fetchAll'
+        );
         const jsonData = await response.json();
         setData(jsonData);
       } catch (error) {
@@ -25,25 +27,24 @@ export default function PetInfoScreen() {
 
   return (
     <View style={styles.container}>
-      <View style={styles.headerContainer}>
-      </View>
+      <View style={styles.headerContainer}></View>
       <View style={styles.buttonContainer}>
         <Button
           icon={<MaterialIcons name="add" size={24} color="black" />}
           onPress={() => console.log('Add button pressed')}
           containerStyle={{ marginRight: 10 }}
-          buttonStyle={{ backgroundColor: "white" }}
+          buttonStyle={{ backgroundColor: 'white' }}
         />
         <Button
           icon={<MaterialIcons name="edit" size={24} color="black" />}
           onPress={() => console.log('Edit button pressed')}
           containerStyle={{ marginRight: 10 }}
-          buttonStyle={{ backgroundColor: "white" }}
+          buttonStyle={{ backgroundColor: 'white' }}
         />
         <Button
           icon={<MaterialIcons name="delete" size={24} color="black" />}
           onPress={() => console.log('Delete button pressed')}
-          buttonStyle={{ backgroundColor: "white" }}
+          buttonStyle={{ backgroundColor: 'white' }}
         />
       </View>
       <View style={styles.contentContainer}>
