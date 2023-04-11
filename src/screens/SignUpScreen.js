@@ -1,20 +1,18 @@
 import { useNavigation } from '@react-navigation/native';
-import { Button, StyleSheet, Text, View } from 'react-native';
-import { AuthRoutes } from '../navigations/routes';
-import TabStackScreen from '../navigations/Nest';
+import { StyleSheet, TextInput, View } from 'react-native';
+import SquareButton, { ColorTypes } from '../components/Button';
+import InputText from '../components/InputText';
 
-const SignUpScreen = () => {
-  const navigation = useNavigation();
-
+const SignUpScreen = ({ navigation }) => {
   return (
-    <View style={styles.container}>
-      <Text>Sign Up</Text>
-      <Button title="Sign Up" />
+    <View style={SignUpstyles.container}>
+      <InputText title="아이디" />
+      <SquareButton colorType={ColorTypes.YELLOW} text="가입하기" />
     </View>
   );
 };
 
-const styles = StyleSheet.create({
+const SignUpstyles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',

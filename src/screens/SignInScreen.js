@@ -14,7 +14,7 @@ const SignInScreen = ({ navigation, route }) => {
 
   return (
     <View style={styles.container}>
-      <Text>Sign In</Text>
+      <Text>로그인</Text>
       <Input
         styles={{
           container: { marginBottom: 20, paddingHorizontal: 20 },
@@ -35,8 +35,7 @@ const SignInScreen = ({ navigation, route }) => {
         inputType={InputTypes.PASSWORD}
         returnKeyType={ReturnKeyTypes.DONE}
       />
-      <Button title="Sign In" onPress={<TabStackScreen />} />
-      <Button title="Sign Up" onPress={() => navigation.navigate('SignUp')} />
+      <Text>로그인하기</Text>
     </View>
   );
 };

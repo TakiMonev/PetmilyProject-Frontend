@@ -12,6 +12,7 @@ import MypetsScreen from '../screens/AfterPetInfo/MyPetsScreen';
 import AddphotoScreen from '../screens/AfterPetInfo/AddPhotoScreen';
 import InitPhotoScreen from '../screens/AfterPetInfo/InitPhotoScreen';
 import PhotoViewScreen from '../screens/AfterPetInfo/PhotoViewScreen';
+import FirstScreen from '../screens/FirstScreen';
 
 const TabStack = createBottomTabNavigator();
 const SignInStack = createStackNavigator();
@@ -22,6 +23,7 @@ const AlbumStack = createStackNavigator();
 const SignInStackScreen = () => {
   return (
     <SignInStack.Navigator>
+      <SignInStack.Screen name="First" component={FirstScreen} />
       <SignInStack.Screen name="SignIn" component={SignInScreen} />
       <SignInStack.Screen name="SignUp" component={SignUpScreen} />
     </SignInStack.Navigator>
