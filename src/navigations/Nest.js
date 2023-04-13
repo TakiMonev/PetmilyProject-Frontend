@@ -13,6 +13,7 @@ import AddphotoScreen from '../screens/AfterPetInfo/AddPhotoScreen';
 import InitPhotoScreen from '../screens/AfterPetInfo/InitPhotoScreen';
 import PhotoViewScreen from '../screens/AfterPetInfo/PhotoViewScreen';
 import FirstScreen from '../screens/FirstScreen';
+import { StackActions } from '@react-navigation/native';
 
 const TabStack = createBottomTabNavigator();
 ``;
@@ -60,12 +61,13 @@ const AlbumStackScreen = () => {
 };
 
 const TabStackScreen = () => {
-  const [Login, setLogin] = useState(true);
+  const [Login, setLogin] = useState(false);
 
   return (
     <>
       {Login === false ? (
-        <FirstScreen />
+        // <FirstScreen />
+        <SignInStackScreen />
       ) : (
         <TabStack.Navigator>
           <TabStack.Screen name="ALBUM" component={HomeScreen} />
@@ -74,11 +76,11 @@ const TabStackScreen = () => {
             component={AddPetStackScreen}
             options={{ headerShown: false }}
           />
-          <TabStack.Screen
+          {/* <TabStack.Screen
             name="SignInStack"
             component={SignInStackScreen}
             options={{ headerShown: false }}
-          />
+          /> */}
           <TabStack.Screen
             name="AlbumStack"
             component={AlbumStackScreen}
