@@ -1,13 +1,12 @@
 import { Button, StyleSheet, Text, View } from 'react-native';
-import { AuthRoutes } from '../navigations/routes';
 import Input, {
   InputTypes,
   KeyboardTypes,
   ReturnKeyTypes,
 } from '../components/Input';
 import { useState } from 'react';
-import TabStackScreen from '../navigations/Nest';
 import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage'; // 로컬 스토리지 사용을 위한 모듈
 
 const SignInScreen = ({ navigation, route }) => {
   const [email, setEmail] = useState('');
@@ -27,8 +26,7 @@ const SignInScreen = ({ navigation, route }) => {
         // 로그인 성공 시 로그인 토큰 저장 또는 다음 화면으로 이동 등의 작업 수행
         const token = response.data.token;
 
-        // 토큰을 로컬 스토리지 등에 저장하는 예시
-        // 로컬 스토리지에 토큰 저장
+        // 토큰을 로컬 스토리지에 저장
         AsyncStorage.setItem('token', token)
           .then(() => {
             console.log('로그인 토큰 저장 완료:', token);
@@ -69,7 +67,7 @@ const SignInScreen = ({ navigation, route }) => {
         inputType={InputTypes.PASSWORD}
         returnKeyType={ReturnKeyTypes.DONE}
       />
-      <Text>로그인하기</Text>
+      <Button title="로그인하기" onPress={handleSignIn} />
     </View>
   );
 };
