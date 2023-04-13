@@ -15,6 +15,7 @@ import PhotoViewScreen from '../screens/AfterPetInfo/PhotoViewScreen';
 import FirstScreen from '../screens/FirstScreen';
 
 const TabStack = createBottomTabNavigator();
+``;
 const SignInStack = createStackNavigator();
 const AddPetStack = createStackNavigator();
 const AlbumStack = createStackNavigator();
@@ -64,7 +65,7 @@ const TabStackScreen = () => {
   return (
     <>
       {Login === false ? (
-        <SignInScreen />
+        <FirstScreen />
       ) : (
         <TabStack.Navigator>
           <TabStack.Screen name="ALBUM" component={HomeScreen} />

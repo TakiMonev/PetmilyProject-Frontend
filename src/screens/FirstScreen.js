@@ -7,6 +7,9 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { AuthRoutes } from '../navigations/routes';
+import SignInScreen from './SignInScreen';
+import Navigation from '../navigations/Navigation';
+import AuthStack from '../navigations/AuthStack';
 
 const FirstScreen = ({ navigation, route }) => {
   return (
