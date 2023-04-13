@@ -12,8 +12,11 @@ import Input2, {
   ReturnKeyTypes2,
 } from '../components/Input2';
 import { useState } from 'react';
-import { BLACK } from '../colors';
+import { BLACK, MAINCOLOR } from '../colors';
 import ImagePickerComponent from '../components/ImagePicker';
+import SquareButton, { ColorTypes } from '../components/Button';
+import InputText from '../components/InputText';
+import { TextInput } from 'react-native-gesture-handler';
 
 const PetRegisterScreen = ({ navigation, route }) => {
   const [petImg, setPetImg] = useState('');
@@ -21,64 +24,19 @@ const PetRegisterScreen = ({ navigation, route }) => {
   const [petAge, setPetAge] = useState('');
   const [petInfo, setPetInfo] = useState('');
 
-  const handleRegister = () => {
-    navigation.navigate('PetMain');
-  };
-
   return (
     <View style={styles.container}>
-      <Text style={styles.heading}>펫 등록</Text>
-      <ImagePickerComponent />
-      <Input2
-        styles={{
-          container: { marginBottom: 20, paddingHorizontal: 20 },
-          input: { borderWidth: 1 },
-        }}
-        value={petName}
-        onChangeText={(text) => setPetName(text.trim())}
-        inputType2={InputTypes2.NAME}
-        returnKeyType={ReturnKeyTypes2.NEXT}
-        placeholder="Pet Name"
-      />
-      <Input2
-        styles={{
-          container: { marginBottom: 20, paddingHorizontal: 20 },
-          input: { borderWidth: 1 },
-        }}
-        value={petAge}
-        onChangeText={(text) => setPetAge(text.trim())}
-        inputType2={InputTypes2.AGE}
-        returnKeyType={ReturnKeyTypes2.NEXT}
-        placeholder="Pet Age"
-        keyboardType={KeyboardTypes2.NUMERIC}
-      />
-      <Input2
-        styles={{
-          container: { marginBottom: 20, paddingHorizontal: 20 },
-          input: { borderWidth: 1 },
-        }}
-        value={petInfo}
-        onChangeText={(text) => setPetInfo(text.trim())}
-        inputType2={InputTypes2.INFO}
-        returnKeyType={ReturnKeyTypes2.DONE}
-        placeholder="Pet Info"
-        multiline={true}
-        numberOfLines={5}
-      />
-      <View style={styles.buttonContainer}>
-        <Button
-          title="Register"
-          color={BLACK}
-          style={buttonStyles.container}
-          onPress={handleRegister}
-        />
-        <Button
-          title="Cancel"
-          color={BLACK}
-          style={[buttonStyles.container, { marginLeft: 10 }]}
-          onPress={() => navigation.goBack()}
-        />
+      <View style={styles.photoContainer}>
+        <View style={styles.photoBox}></View>
+        <TextInput style={styles.name}>이름</TextInput>
       </View>
+      <View>
+        <InputText title="성별" placeholder={'예 암컷'} />
+        <InputText title="나이" placeholder={'예 암컷'} />
+        <InputText title="구분" placeholder={'예 암컷'} />
+        <InputText title="특징" placeholder={'예 암컷'} />
+      </View>
+      <SquareButton colorType={ColorTypes.YELLOW} text="등록하기" />
     </View>
   );
 };
@@ -88,13 +46,11 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    paddingHorizontal: 30,
     backgroundColor: '#fff',
   },
-  heading: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 30,
+  photoContainer: {
+    flex: 1,
+    marginTop: 30,
   },
   buttonContainer: {
     flexDirection: 'row',
@@ -103,16 +59,14 @@ const styles = StyleSheet.create({
     width: '100%',
     paddingHorizontal: 20,
   },
-});
-
-const buttonStyles = StyleSheet.create({
-  container: {
-    flex: 1,
-    marginHorizontal: 20,
-    marginTop: 10,
+  photoBox: {
+    backgroundColor: MAINCOLOR.BRIGHTGRAY,
+    borderRadius: 10,
+    width: 150,
+    height: 150,
   },
-  button: {
-    borderRadius: 8,
+  name: {
+    fontSize: 20,
   },
 });
 

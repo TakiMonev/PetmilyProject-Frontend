@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import PropTypes from 'prop-types';
 
@@ -17,14 +17,18 @@ export const ColorTypes = {
   WHITE: 'WHITE',
 };
 
-const SquareButton = ({ colorType, text }) => {
+const SquareButton = ({ colorType, text, onPress }) => {
   const { color, backgroundColor } = ColorTypeProps[colorType];
   return (
-    <TouchableOpacity
-      style={[btnStyle.yellow, { backgroundColor: `${backgroundColor}` }]}
-    >
-      <Text style={[btnStyle.yellow_text, { color: `${color}` }]}>{text}</Text>
-    </TouchableOpacity>
+    <Pressable onPress={onPress}>
+      <TouchableOpacity
+        style={[btnStyle.yellow, { backgroundColor: `${backgroundColor}` }]}
+      >
+        <Text style={[btnStyle.yellow_text, { color: `${color}` }]}>
+          {text}
+        </Text>
+      </TouchableOpacity>
+    </Pressable>
   );
 };
 
@@ -34,7 +38,7 @@ SquareButton.prototype = {
 
 const btnStyle = StyleSheet.create({
   yellow: {
-    width: 300,
+    width: 350,
     alignItems: 'center',
     paddingVertical: 17,
     borderRadius: 10,

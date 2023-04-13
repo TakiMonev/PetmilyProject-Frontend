@@ -7,6 +7,7 @@ import Input, {
 } from '../components/Input';
 import { useState } from 'react';
 import TabStackScreen from '../navigations/Nest';
+import SquareButton, { ColorTypes } from '../components/Button';
 
 const SignInScreen = ({ navigation, route }) => {
   const [email, setEmail] = useState('');
@@ -14,7 +15,6 @@ const SignInScreen = ({ navigation, route }) => {
 
   return (
     <View style={styles.container}>
-      <Text>로그인</Text>
       <Input
         styles={{
           container: { marginBottom: 20, paddingHorizontal: 20 },
@@ -35,7 +35,7 @@ const SignInScreen = ({ navigation, route }) => {
         inputType={InputTypes.PASSWORD}
         returnKeyType={ReturnKeyTypes.DONE}
       />
-      <Text>로그인하기</Text>
+      <SquareButton colorType={ColorTypes.YELLOW} text="로그인하기" />
     </View>
   );
 };

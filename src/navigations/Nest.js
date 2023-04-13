@@ -6,7 +6,7 @@ import SignUpScreen from '../screens/SignUpScreen';
 import { useState } from 'react';
 import PetRegister from '../screens/PetRegister';
 import PetMainScreen from '../screens/PetMainScreen';
-import AddPetScreen from '../screens/AfterPetInfo/AddPetScreen';
+import AddPetScreen from '../screens/AddPetScreen';
 import PetRegisterScreen from '../screens/PetRegister';
 import MypetsScreen from '../screens/AfterPetInfo/MyPetsScreen';
 import AddphotoScreen from '../screens/AfterPetInfo/AddPhotoScreen';
@@ -23,9 +23,21 @@ const AlbumStack = createStackNavigator();
 const SignInStackScreen = () => {
   return (
     <SignInStack.Navigator>
-      <SignInStack.Screen name="First" component={FirstScreen} />
-      <SignInStack.Screen name="SignIn" component={SignInScreen} />
-      <SignInStack.Screen name="SignUp" component={SignUpScreen} />
+      <SignInStack.Screen
+        name="First"
+        component={FirstScreen}
+        options={{ headerShown: false }}
+      />
+      <SignInStack.Screen
+        name="SignIn"
+        component={SignInScreen}
+        options={{ title: '로그인' }}
+      />
+      <SignInStack.Screen
+        name="SignUp"
+        component={SignUpScreen}
+        options={{ title: '회원가입' }}
+      />
     </SignInStack.Navigator>
   );
 };
@@ -36,9 +48,13 @@ const AddPetStackScreen = () => {
       <AddPetStack.Screen
         name="AddPet"
         component={AddPetScreen}
-        options={{ title: '펫관리' }}
+        options={{ headerShown: false }}
       />
-      <AddPetStack.Screen name="RegisterPet" component={PetRegisterScreen} />
+      <AddPetStack.Screen
+        name="RegisterPet"
+        component={PetRegisterScreen}
+        options={{ title: '펫등록' }}
+      />
       <AddPetStack.Screen name="PetMain" component={PetMainScreen} />
     </AddPetStack.Navigator>
   );
