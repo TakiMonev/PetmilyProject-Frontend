@@ -4,7 +4,6 @@ import HomeScreen from '../screens/HomeScreen';
 import SignInScreen from '../screens/SignInScreen';
 import SignUpScreen from '../screens/SignUpScreen';
 import { useState } from 'react';
-import PetRegister from '../screens/PetRegister';
 import PetMainScreen from '../screens/PetMainScreen';
 import AddPetScreen from '../screens/AddPetScreen';
 import PetRegisterScreen from '../screens/PetRegister';
@@ -13,15 +12,16 @@ import AddphotoScreen from '../screens/AfterPetInfo/AddPhotoScreen';
 import InitPhotoScreen from '../screens/AfterPetInfo/InitPhotoScreen';
 import PhotoViewScreen from '../screens/AfterPetInfo/PhotoViewScreen';
 import FirstScreen from '../screens/FirstScreen';
-import { StackActions } from '@react-navigation/native';
+import React from 'react';
+import { View } from 'react-native';
 
 const TabStack = createBottomTabNavigator();
 ``;
-const SignInStack = createStackNavigator();
+//const SignInStack = createStackNavigator();
 const AddPetStack = createStackNavigator();
 const AlbumStack = createStackNavigator();
 
-/*로그인*/
+/*로그인
 const SignInStackScreen = () => {
   return (
     <SignInStack.Navigator>
@@ -43,6 +43,7 @@ const SignInStackScreen = () => {
     </SignInStack.Navigator>
   );
 };
+*/
 /*펫추가*/
 const AddPetStackScreen = () => {
   return (
@@ -76,35 +77,28 @@ const AlbumStackScreen = () => {
   );
 };
 
-const TabStackScreen = () => {
-  const [Login, setLogin] = useState(true);
-
+export const TabStackScreen = () => {
   return (
     <>
-      {Login === false ? (
-        // <FirstScreen />
-        <SignInStackScreen />
-      ) : (
-        <TabStack.Navigator>
-          <TabStack.Screen name="ALBUM" component={HomeScreen} />
-          <TabStack.Screen
-            name="Main"
-            component={AddPetStackScreen}
-            options={{ headerShown: false }}
-          />
-          {/* <TabStack.Screen
+      <TabStack.Navigator>
+        <TabStack.Screen name="ALBUM" component={HomeScreen} />
+        <TabStack.Screen
+          name="Main"
+          component={AddPetStackScreen}
+          options={{ headerShown: false }}
+        />
+        {/* <TabStack.Screen
             name="SignInStack"
             component={SignInStackScreen}
             options={{ headerShown: false }}
           /> */}
-          <TabStack.Screen
-            name="AlbumStack"
-            component={AlbumStackScreen}
-            options={{ headerShown: false }}
-          />
-          <TabStack.Screen name="ENTIRE" component={PetMainScreen} />
-        </TabStack.Navigator>
-      )}
+        <TabStack.Screen
+          name="AlbumStack"
+          component={AlbumStackScreen}
+          options={{ headerShown: false }}
+        />
+        <TabStack.Screen name="ENTIRE" component={PetMainScreen} />
+      </TabStack.Navigator>
     </>
   );
 };

@@ -1,11 +1,14 @@
 import { Image, Pressable, TouchableOpacity } from 'react-native';
 import { Text, View, StyleSheet } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
 
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import * as ImagePicker from 'expo-image-picker';
+import { WHITE } from '../colors';
+import { ImageContext } from '../context/LoginContext';
 
-const ImagePickerComponent = () => {
+export const ImagePickerComponent = ({ width, height }) => {
   const [imageUrl, setImageUrl] = useState('');
   const [status, requestPermission] = ImagePicker.useMediaLibraryPermissions();
   const [upload, setUpload] = useState(false);
@@ -18,10 +21,10 @@ const ImagePickerComponent = () => {
       }
     }
     const result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
-      allowEditing: false,
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
       quality: 1,
-      aspect: [1, 1],
     });
     if (result.canceled) {
       setUpload(false);
@@ -32,45 +35,32 @@ const ImagePickerComponent = () => {
     }
   };
 
+  const styles = StyleSheet.create({
+    floatingButton: {
+      width: width,
+      height: height,
+      alignItems: 'center',
+      justifyContent: 'center',
+      borderStyle: 'solid',
+      borderRadius: 30,
+      elevation: 8,
+      backgroundColor: WHITE,
+      borderWidth: 1,
+    },
+  });
+
   return (
-    <View style={styles.addphotobox}>
-      {upload ? (
-        <TouchableOpacity onPress={uploadImage} style={styles.photo}>
-          <Image source={{ uri: imageUrl }} style={styles.photo} />
-        </TouchableOpacity>
-      ) : (
-        <Pressable onPress={uploadImage}>
-          <Text>사진등록</Text>
-          <TouchableOpacity onPress={uploadImage}>
-            <MaterialCommunityIcons
-              name="plus-circle-outline"
-              size={50}
-              color="black"
-              margin={15}
-            />
-          </TouchableOpacity>
-        </Pressable>
-      )}
-    </View>
+    <Pressable onPress={uploadImage}>
+      <TouchableOpacity onPress={uploadImage} style={styles.floatingButton}>
+        <Ionicons
+          style={{ alignItems: 'center', justifyContent: 'center' }}
+          name="camera-outline"
+          size={30}
+          color="black"
+        />
+      </TouchableOpacity>
+    </Pressable>
   );
 };
-
-const styles = StyleSheet.create({
-  addphotobox: {
-    borderStyle: 'solid',
-    borderWidth: 1,
-    borderRadius: 10,
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: '80%',
-    height: '60%',
-  },
-  photo: {
-    flex: 1,
-    width: '100%',
-    height: '100%',
-    borderRadius: 10,
-  },
-});
 
 export default ImagePickerComponent;
