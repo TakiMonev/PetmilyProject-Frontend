@@ -4,6 +4,7 @@ import {
   StyleSheet,
   TouchableOpacity,
   Pressable,
+  Image,
 } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import SquareButton, { ColorTypes } from '../components/Button';
@@ -13,14 +14,10 @@ import { MAINCOLOR } from '../colors';
 const AddpetScreen = ({ navigation, route }) => {
   return (
     <View style={styles.container}>
-      <TouchableOpacity>
-        <MaterialCommunityIcons
-          name="plus-circle-outline"
-          size={50}
-          color="black"
-          margin={15}
-        />
-      </TouchableOpacity>
+      <Image
+        source={require('../assets/pet_icon.png')}
+        style={{ width: 180, height: 180, marginBottom: 40 }}
+      />
 
       <SquareButton
         colorType={ColorTypes.YELLOW}
