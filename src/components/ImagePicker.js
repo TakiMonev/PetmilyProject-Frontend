@@ -6,7 +6,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { useContext, useState } from 'react';
 import * as ImagePicker from 'expo-image-picker';
 import { WHITE } from '../colors';
-import { ImageContext } from '../context/LoginContext';
+//import { ImageContext } from '../context/LoginContext';
 
 export const ImagePickerComponent = ({ width, height }) => {
   const [imageUrl, setImageUrl] = useState('');
