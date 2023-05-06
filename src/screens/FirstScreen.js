@@ -65,9 +65,11 @@ const styles = StyleSheet.create({
     width: '100%',
     justifyContent: 'center',
     alignItems: 'center',
+    paddingTop: 100,
   },
   main_container: {
     flex: 1,
+    marginTop: -80,
     alignItems: 'center',
   },
   find_container: {

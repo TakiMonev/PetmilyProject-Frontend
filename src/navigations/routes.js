@@ -1,6 +1,9 @@
 export const AuthRoutes = {
     SIGN_IN: 'SignIn',
-    SIGN_UP: 'SignUp'
+    SIGN_UP: 'SignUp',
+    NAVIGATION: 'Navigation',
+    HOME: 'Home',
+    ENTIRE: 'ENTIRE',
 };
 
 export const ContentRoutes = {

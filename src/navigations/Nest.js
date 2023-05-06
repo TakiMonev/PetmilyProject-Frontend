@@ -3,8 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import HomeScreen from '../screens/HomeScreen';
 import SignInScreen from '../screens/SignInScreen';
 import SignUpScreen from '../screens/SignUpScreen';
-import { useState } from 'react';
-import PetRegister from '../screens/PetRegister';
+import { createContext, useState } from 'react';
 import PetMainScreen from '../screens/PetMainScreen';
 import AddPetScreen from '../screens/AddPetScreen';
 import PetRegisterScreen from '../screens/PetRegister';
@@ -13,37 +12,34 @@ import AddphotoScreen from '../screens/AfterPetInfo/AddPhotoScreen';
 import InitPhotoScreen from '../screens/AfterPetInfo/InitPhotoScreen';
 import PhotoViewScreen from '../screens/AfterPetInfo/PhotoViewScreen';
 import FirstScreen from '../screens/FirstScreen';
-import { StackActions } from '@react-navigation/native';
+import React from 'react';
+import { View } from 'react-native';
 
 const TabStack = createBottomTabNavigator();
-``;
-const SignInStack = createStackNavigator();
 const AddPetStack = createStackNavigator();
 const AlbumStack = createStackNavigator();
+const SignInStack = createStackNavigator();
 
-/*로그인*/
-const SignInStackScreen = () => {
+export const AuthContext = createContext();
+
+export const AuthProvider = ({ children }) => {
+  const [isSignedIn, setIsSignedIn] = useState(false);
+
+  const signIn = () => {
+    setIsSignedIn(true);
+  };
+
+  const signOut = () => {
+    setIsSignedIn(false);
+  };
+
   return (
-    <SignInStack.Navigator>
-      <SignInStack.Screen
-        name="First"
-        component={FirstScreen}
-        options={{ headerShown: false }}
-      />
-      <SignInStack.Screen
-        name="SignIn"
-        component={SignInScreen}
-        options={{ title: '로그인' }}
-      />
-      <SignInStack.Screen
-        name="SignUp"
-        component={SignUpScreen}
-        options={{ title: '회원가입' }}
-      />
-    </SignInStack.Navigator>
+    <AuthContext.Provider value={{ isSignedIn, signIn, signOut }}>
+      {children}
+    </AuthContext.Provider>
   );
 };
-/*펫추가*/
+
 const AddPetStackScreen = () => {
   return (
     <AddPetStack.Navigator>
@@ -61,51 +57,70 @@ const AddPetStackScreen = () => {
     </AddPetStack.Navigator>
   );
 };
-/*공유 사진첩*/
+
 const AlbumStackScreen = () => {
   return (
     <AlbumStack.Navigator>
-      <AddPetStack.Screen
+      <AlbumStack.Screen
         name="InitPhoto"
         component={InitPhotoScreen}
         options={{ title: '공유사진첩' }}
       />
-      <AddPetStack.Screen name="AddPhoto" component={AddphotoScreen} />
-      <AddPetStack.Screen name="Album" component={PhotoViewScreen} />
+      <AlbumStack.Screen name="AddPhoto" component={AddphotoScreen} />
+      <AlbumStack.Screen name="Album" component={PhotoViewScreen} />
     </AlbumStack.Navigator>
   );
 };
 
 const TabStackScreen = () => {
-  const [Login, setLogin] = useState(true);
+  const [isSignedIn, setIsSignedIn] = useState(false);
+
+  const authContext = {
+    signIn: () => setIsSignedIn(true),
+    signOut: () => setIsSignedIn(false),
+  };
+
+  if (!isSignedIn) {
+    return (
+      <AuthContext.Provider value={authContext}>
+        <SignInStack.Navigator>
+          <SignInStack.Screen
+            name="First"
+            component={FirstScreen}
+            options={{ headerShown: false }}
+          />
+          <SignInStack.Screen
+            name="SignIn"
+            component={SignInScreen}
+            options={{ title: '로그인' }}
+          />
+          <SignInStack.Screen
+            name="SignUp"
+            component={SignUpScreen}
+            options={{ title: '회원가입' }}
+          />
+        </SignInStack.Navigator>
+      </AuthContext.Provider>
+    );
+  }
 
   return (
-    <>
-      {Login === false ? (
-        // <FirstScreen />
-        <SignInStackScreen />
-      ) : (
-        <TabStack.Navigator>
-          <TabStack.Screen name="ALBUM" component={HomeScreen} />
-          <TabStack.Screen
-            name="Main"
-            component={AddPetStackScreen}
-            options={{ headerShown: false }}
-          />
-          {/* <TabStack.Screen
-            name="SignInStack"
-            component={SignInStackScreen}
-            options={{ headerShown: false }}
-          /> */}
-          <TabStack.Screen
-            name="AlbumStack"
-            component={AlbumStackScreen}
-            options={{ headerShown: false }}
-          />
-          <TabStack.Screen name="ENTIRE" component={PetMainScreen} />
-        </TabStack.Navigator>
-      )}
-    </>
+    <AuthContext.Provider value={authContext}>
+      <TabStack.Navigator>
+        <TabStack.Screen name="ALBUM" component={HomeScreen} />
+        <TabStack.Screen
+          name="Main"
+          component={AddPetStackScreen}
+          options={{ headerShown: false }}
+        />
+        <TabStack.Screen
+          name="AlbumStack"
+          component={AlbumStackScreen}
+          options={{ headerShown: false }}
+        />
+        <TabStack.Screen name="ENTIRE" component={PetMainScreen} />
+      </TabStack.Navigator>
+    </AuthContext.Provider>
   );
 };
 
