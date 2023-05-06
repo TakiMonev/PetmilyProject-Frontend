@@ -3,7 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import HomeScreen from '../screens/HomeScreen';
 import SignInScreen from '../screens/SignInScreen';
 import SignUpScreen from '../screens/SignUpScreen';
-import { useState } from 'react';
+import { createContext, useState } from 'react';
 import PetMainScreen from '../screens/PetMainScreen';
 import AddPetScreen from '../screens/AddPetScreen';
 import PetRegisterScreen from '../screens/PetRegister';
@@ -19,6 +19,26 @@ const TabStack = createBottomTabNavigator();
 const AddPetStack = createStackNavigator();
 const AlbumStack = createStackNavigator();
 const SignInStack = createStackNavigator();
+
+export const AuthContext = createContext();
+
+export const AuthProvider = ({ children }) => {
+  const [isSignedIn, setIsSignedIn] = useState(false);
+
+  const signIn = () => {
+    setIsSignedIn(true);
+  };
+
+  const signOut = () => {
+    setIsSignedIn(false);
+  };
+
+  return (
+    <AuthContext.Provider value={{ isSignedIn, signIn, signOut }}>
+      {children}
+    </AuthContext.Provider>
+  );
+};
 
 const AddPetStackScreen = () => {
   return (
@@ -53,52 +73,55 @@ const AlbumStackScreen = () => {
 };
 
 const TabStackScreen = () => {
-  const [isSignedIn, setIsSignedIn] = useState(false); // 로그인 상태를 저장하는 state
+  const [isSignedIn, setIsSignedIn] = useState(false);
 
-  // 로그인 되어 있지 않은 경우 FirstScreen을 보여줍니다.
+  const authContext = {
+    signIn: () => setIsSignedIn(true),
+    signOut: () => setIsSignedIn(false),
+  };
+
   if (!isSignedIn) {
     return (
-      <SignInStack.Navigator>
-        <SignInStack.Screen
-          name="First"
-          component={FirstScreen}
-          options={{ headerShown: false }}
-        />
-        <SignInStack.Screen
-          name="SignIn"
-          component={SignInScreen}
-          options={{ title: '로그인' }}
-        />
-        <SignInStack.Screen
-          name="SignUp"
-          component={SignUpScreen}
-          options={{ title: '회원가입' }}
-        />
-      </SignInStack.Navigator>
+      <AuthContext.Provider value={authContext}>
+        <SignInStack.Navigator>
+          <SignInStack.Screen
+            name="First"
+            component={FirstScreen}
+            options={{ headerShown: false }}
+          />
+          <SignInStack.Screen
+            name="SignIn"
+            component={SignInScreen}
+            options={{ title: '로그인' }}
+          />
+          <SignInStack.Screen
+            name="SignUp"
+            component={SignUpScreen}
+            options={{ title: '회원가입' }}
+          />
+        </SignInStack.Navigator>
+      </AuthContext.Provider>
     );
   }
 
-  // 로그인 되어 있는 경우 TabStack을 보여줍니다.
-  if (true) {
-    return (
-      <>
-        <TabStack.Navigator>
-          <TabStack.Screen name="ALBUM" component={HomeScreen} />
-          <TabStack.Screen
-            name="Main"
-            component={AddPetStackScreen}
-            options={{ headerShown: false }}
-          />
-          <TabStack.Screen
-            name="AlbumStack"
-            component={AlbumStackScreen}
-            options={{ headerShown: false }}
-          />
-          <TabStack.Screen name="ENTIRE" component={PetMainScreen} />
-        </TabStack.Navigator>
-      </>
-    );
-  }
+  return (
+    <AuthContext.Provider value={authContext}>
+      <TabStack.Navigator>
+        <TabStack.Screen name="ALBUM" component={HomeScreen} />
+        <TabStack.Screen
+          name="Main"
+          component={AddPetStackScreen}
+          options={{ headerShown: false }}
+        />
+        <TabStack.Screen
+          name="AlbumStack"
+          component={AlbumStackScreen}
+          options={{ headerShown: false }}
+        />
+        <TabStack.Screen name="ENTIRE" component={PetMainScreen} />
+      </TabStack.Navigator>
+    </AuthContext.Provider>
+  );
 };
 
 export default TabStackScreen;
