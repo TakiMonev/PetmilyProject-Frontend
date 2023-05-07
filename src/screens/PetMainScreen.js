@@ -1,15 +1,39 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Image, View, Platform, Text, StyleSheet } from 'react-native';
+import {
+  Button,
+  Image,
+  View,
+  Platform,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+} from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import ScheduleList from './ScheduleList';
 import { Icon } from 'react-native-elements/dist/icons/Icon';
-import { TouchableOpacity } from 'react-native';
+import DatePicker from 'react-native-datepicker';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { AntDesign } from '@expo/vector-icons';
 
-function PetMainScreen() {
+function PetMainScreen({ navigation, route }) {
   const [image, setImage] = useState(null);
 
   // 펫 정보를 나타낼 상태 변수
   const [petInfo, setPetInfo] = useState(null);
+
+  const [selectedDate, setSelectedDate] = useState(new Date());
+  const handlePrevDay = () => {
+    const newDate = new Date(selectedDate);
+    newDate.setDate(selectedDate.getDate() - 1);
+    setSelectedDate(newDate);
+  };
+
+  const handleNextDay = () => {
+    const newDate = new Date(selectedDate);
+    newDate.setDate(selectedDate.getDate() + 1);
+    setSelectedDate(newDate);
+  };
 
   const pickImage = async () => {
     // No permissions request is necessary for launching the image library
@@ -66,8 +90,26 @@ function PetMainScreen() {
           </View>
         )}
       </View>
+      <View style={styles.calendarcontainer}>
+        <TouchableOpacity onPress={handlePrevDay} style={styles.arrowButton}>
+          <AntDesign name="left" size={24} color="black" />
+        </TouchableOpacity>
+        <DatePicker
+          style={styles.datepicker}
+          date={selectedDate}
+          mode="date"
+          placeholder="날짜 선택"
+          format="YYYY-MM-DD"
+          minDate="2021-01-01"
+          maxDate="2030-12-31"
+          onDateChange={setSelectedDate}
+          iconComponent={<View />} // 아이콘 제거
+        />
+        <TouchableOpacity onPress={handleNextDay} style={styles.arrowButton}>
+          <AntDesign name="right" size={24} color="black" />
+        </TouchableOpacity>
+      </View>
       <View style={styles.bottomContainer}>
-        <Text style={{ fontSize: 25 }}>일정</Text>
         <ScheduleList />
       </View>
 
@@ -76,6 +118,7 @@ function PetMainScreen() {
         style={styles.floatingButton}
         onPress={() => {
           // 버튼 클릭시 동작할 내용 추가
+          navigation.navigate('AddPetSchedule');
         }}
       >
         <Icon name="add" color="#ffffff" size={30} />
@@ -101,7 +144,7 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
   },
   bottomContainer: {
-    marginTop: 45,
+    marginTop: 15,
     marginLeft: 15,
   },
   floatingButton: {
@@ -115,6 +158,27 @@ const styles = StyleSheet.create({
     backgroundColor: '#FF4500',
     borderRadius: 30,
     elevation: 8,
+  },
+  calendarcontainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginLeft: 15,
+    marginTop: 30,
+  },
+  label: {
+    fontSize: 5,
+    fontWeight: 'bold',
+    marginBottom: 10,
+  },
+  datepicker: {
+    width: 200,
+  },
+  selectedDate: {
+    marginTop: 20,
+  },
+  arrowButton: {
+    paddingHorizontal: 30,
   },
 });
 

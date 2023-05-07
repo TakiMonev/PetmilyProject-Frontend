@@ -14,11 +14,13 @@ import PhotoViewScreen from '../screens/AfterPetInfo/PhotoViewScreen';
 import FirstScreen from '../screens/FirstScreen';
 import React from 'react';
 import { View } from 'react-native';
+import AddSchduleScreen from '../screens/CarePet/AddScheduleScreen';
 
 const TabStack = createBottomTabNavigator();
 const AddPetStack = createStackNavigator();
 const AlbumStack = createStackNavigator();
 const SignInStack = createStackNavigator();
+const AddPetScheduleStack = createStackNavigator();
 
 export const AuthContext = createContext();
 
@@ -72,6 +74,26 @@ const AlbumStackScreen = () => {
   );
 };
 
+const AddPetScheduleStackScreen = () => {
+  return (
+    <AddPetScheduleStack.Navigator>
+      {/* <AddPetScheduleStack.Screen
+        name="schedulescreen"
+        component={PetMainScreen}
+        options={{ title: '펫일정' }}
+      /> */}
+      <AddPetScheduleStack.Screen
+        name="schedulepage"
+        component={PetMainScreen}
+      />
+      <AddPetScheduleStack.Screen
+        name="AddPetSchedule"
+        component={AddSchduleScreen}
+      />
+    </AddPetScheduleStack.Navigator>
+  );
+};
+
 const TabStackScreen = () => {
   const [isSignedIn, setIsSignedIn] = useState(false);
 
@@ -118,7 +140,10 @@ const TabStackScreen = () => {
           component={AlbumStackScreen}
           options={{ headerShown: false }}
         />
-        <TabStack.Screen name="ENTIRE" component={PetMainScreen} />
+        <TabStack.Screen
+          name="AddPetSchedule"
+          component={AddPetScheduleStackScreen}
+        />
       </TabStack.Navigator>
     </AuthContext.Provider>
   );
