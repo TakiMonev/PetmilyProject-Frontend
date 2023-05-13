@@ -118,7 +118,7 @@ const TabStackScreen = () => {
           component={AlbumStackScreen}
           options={{ headerShown: false }}
         />
-        <TabStack.Screen name="ENTIRE" component={PetMainScreen} />
+        <TabStack.Screen name="User Info" component={UserInfoScreen} />
       </TabStack.Navigator>
     </AuthContext.Provider>
   );
