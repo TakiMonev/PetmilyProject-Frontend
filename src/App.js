@@ -9,8 +9,8 @@ const App = () => {
     <>
       <StatusBar style="dark" />
       {/* <FirstScreen /> */}
-      {/* <Navigation /> */}
-      <PetMainScreen />
+      <Navigation />
+      {/* <PetMainScreen /> */}
     </>
   );
 };

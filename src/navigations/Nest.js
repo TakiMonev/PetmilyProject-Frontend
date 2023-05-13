@@ -83,12 +83,14 @@ const AddPetScheduleStackScreen = () => {
         options={{ title: '펫일정' }}
       /> */}
       <AddPetScheduleStack.Screen
-        name="schedulepage"
+        name="펫 일정"
         component={PetMainScreen}
+        options={{ headerShown: false }}
       />
       <AddPetScheduleStack.Screen
         name="AddPetSchedule"
         component={AddSchduleScreen}
+        options={{ title: '일정 추가' }}
       />
     </AddPetScheduleStack.Navigator>
   );
@@ -143,6 +145,7 @@ const TabStackScreen = () => {
         <TabStack.Screen
           name="AddPetSchedule"
           component={AddPetScheduleStackScreen}
+          options={{ headerShown: false }}
         />
       </TabStack.Navigator>
     </AuthContext.Provider>
