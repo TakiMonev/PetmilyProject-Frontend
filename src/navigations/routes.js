@@ -3,7 +3,7 @@ export const AuthRoutes = {
     SIGN_UP: 'SignUp',
     NAVIGATION: 'Navigation',
     HOME: 'Home',
-    ENTIRE: 'ENTIRE',
+    ENTIRE: 'USER_INFO',
 };
 
 export const ContentRoutes = {
