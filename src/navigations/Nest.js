@@ -14,11 +14,13 @@ import PhotoViewScreen from '../screens/AfterPetInfo/PhotoViewScreen';
 import FirstScreen from '../screens/FirstScreen';
 import React from 'react';
 import { View } from 'react-native';
+import AddSchduleScreen from '../screens/CarePet/AddScheduleScreen';
 
 const TabStack = createBottomTabNavigator();
 const AddPetStack = createStackNavigator();
 const AlbumStack = createStackNavigator();
 const SignInStack = createStackNavigator();
+const AddPetScheduleStack = createStackNavigator();
 
 export const AuthContext = createContext();
 
@@ -27,18 +29,18 @@ export const AuthProvider = ({ children }) => {
 
   const signIn = () => {
     setIsSignedIn(true);
-  }
+  };
 
   const signOut = () => {
     setIsSignedIn(false);
-  }
+  };
 
   return (
     <AuthContext.Provider value={{ isSignedIn, signIn, signOut }}>
       {children}
     </AuthContext.Provider>
-  )
-}
+  );
+};
 
 const AddPetStackScreen = () => {
   return (
@@ -69,6 +71,28 @@ const AlbumStackScreen = () => {
       <AlbumStack.Screen name="AddPhoto" component={AddphotoScreen} />
       <AlbumStack.Screen name="Album" component={PhotoViewScreen} />
     </AlbumStack.Navigator>
+  );
+};
+
+const AddPetScheduleStackScreen = () => {
+  return (
+    <AddPetScheduleStack.Navigator>
+      {/* <AddPetScheduleStack.Screen
+        name="schedulescreen"
+        component={PetMainScreen}
+        options={{ title: '펫일정' }}
+      /> */}
+      <AddPetScheduleStack.Screen
+        name="펫 일정"
+        component={PetMainScreen}
+        options={{ headerShown: false }}
+      />
+      <AddPetScheduleStack.Screen
+        name="AddPetSchedule"
+        component={AddSchduleScreen}
+        options={{ title: '일정 추가' }}
+      />
+    </AddPetScheduleStack.Navigator>
   );
 };
 
@@ -119,6 +143,11 @@ const TabStackScreen = () => {
           options={{ headerShown: false }}
         />
         <TabStack.Screen name="User Info" component={UserInfoScreen} />
+        <TabStack.Screen
+          name="AddPetSchedule"
+          component={AddPetScheduleStackScreen}
+          options={{ headerShown: false }}
+        />
       </TabStack.Navigator>
     </AuthContext.Provider>
   );

@@ -16,7 +16,7 @@ const FirstScreen = ({ navigation, route }) => {
     <View style={styles.container}>
       <View style={styles.title_container}>
         <Text style={styles.main_title}>PETMILY</Text>
-        <Text style={styles.sub_title}>함께 피우는 마이펫</Text>
+        <Text style={styles.sub_title}>함께 키우는 마이펫</Text>
       </View>
       <View style={styles.main_container}>
         <TouchableOpacity

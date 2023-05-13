@@ -14,6 +14,7 @@ import { AuthContext } from '../navigations/Nest';
 const SignInScreen = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
   const { signIn, isSignedIn } = useContext(AuthContext); // isSignedIn 가져오기
 
   const handleSignIn = () => {
@@ -27,6 +28,9 @@ const SignInScreen = () => {
       )
       .then((response) => {
         const token = response.data.token;
+        const loginsuccess = () => {
+          setIsSignedIn(true);
+        };
 
         AsyncStorage.setItem('token', token)
           .then(() => {
