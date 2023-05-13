@@ -1,29 +1,121 @@
 import { useNavigation } from '@react-navigation/native';
-import { StyleSheet, TextInput, View } from 'react-native';
+import {
+  StyleSheet,
+  TextInput,
+  View,
+  Alert,
+  Text,
+  TouchableOpacity,
+} from 'react-native';
 import SquareButton, { ColorTypes } from '../components/Button';
 import InputText from '../components/InputText';
+import axios from 'axios';
+import { useState } from 'react';
+import Input, { InputTypes, ReturnKeyTypes } from '../components/Input';
+import Navigation from '../navigations/Navigation';
+import FirstScreen from './FirstScreen';
 
 const SignUpScreen = ({ navigation }) => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  // const [passwordConfirm, setPasswordConfirm] = useState('');
+  const [userName, setUserName] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [inviter, setInviter] = useState('');
+
+  const handleSignup = () => {
+    axios
+      .post(
+        'http://ec2-43-200-8-47.ap-northeast-2.compute.amazonaws.com:8080/auth/signup',
+        {
+          email: email,
+          password: password,
+          // passwordConfirm: passwordConfirm,
+          userName: userName,
+          phoneNumber: phoneNumber,
+          inviter: email,
+        }
+      )
+      .then((response) => {
+        console.log(response);
+        Alert.alert('회원가입 성공', [
+          {
+            text: '확인',
+          },
+        ]);
+      })
+      .catch((error) => {
+        console.error('회원가입 실패:', error);
+        Alert.alert('회원가입 실패', '다시 시도해주세요.');
+      });
+  };
+
   return (
-    <View style={SignUpstyles.container}>
-      <InputText title="아이디 *" placeholder="예  petmily1234" />
-      <InputText title="비밀번호 *" placeholder="비밀번호를 입력해주세요" />
-      <InputText
-        title="비밀번호 확인 *"
-        placeholder="비밀번호를 한번 더 입력해주세요"
+    <View style={styles.container}>
+      <TextInput
+        style={styles.input}
+        value={email}
+        onChangeText={(text) => setEmail(text)}
+        placeholder="이메일"
       />
-      <InputText title="닉네임 *" placeholder="닉네임을 입력해주세요" />
-      <InputText title="이메일 *" placeholder="예  petmily @ mily.com" />
-      <SquareButton colorType={ColorTypes.YELLOW} text="가입하기" />
+      <TextInput
+        style={styles.input}
+        value={password}
+        onChangeText={(text) => setPassword(text)}
+        placeholder="비밀번호"
+        secureTextEntry={true}
+      />
+      {/* <TextInput
+        style={styles.input}
+        value={passwordConfirm}
+        onChangeText={(text) => setPasswordConfirm(text)}
+        placeholder="비밀번호 확인"
+        secureTextEntry={true}
+      /> */}
+      <TextInput
+        style={styles.input}
+        value={userName}
+        onChangeText={(text) => setUserName(text)}
+        placeholder="닉네임"
+      />
+      <TextInput
+        style={styles.input}
+        value={phoneNumber}
+        onChangeText={(text) => setPhoneNumber(text)}
+        placeholder="전화번호"
+      />
+      <TouchableOpacity style={styles.button} onPress={handleSignup}>
+        <Text style={styles.buttonText}>회원가입</Text>
+      </TouchableOpacity>
     </View>
   );
 };
 
-const SignUpstyles = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  input: {
+    width: '80%',
+    padding: 10,
+    marginBottom: 10,
+    borderWidth: 1,
+    borderRadius: 5,
+    borderColor: '#ccc',
+  },
+  button: {
+    width: '80%',
+    padding: 10,
+    backgroundColor: '#007bff',
+    borderRadius: 5,
+    alignItems: 'center',
+    marginTop: 10,
+  },
+  buttonText: {
+    color: '#fff',
+    fontWeight: 'bold',
   },
 });
 

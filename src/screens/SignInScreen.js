@@ -20,7 +20,7 @@ const SignInScreen = () => {
   const handleSignIn = () => {
     axios
       .post(
-        'http://ec2-13-125-244-38.ap-northeast-2.compute.amazonaws.com:8080/auth/login',
+        'http://ec2-43-200-8-47.ap-northeast-2.compute.amazonaws.com:8080/auth/login',
         {
           email: email,
           password: password,
