@@ -18,6 +18,7 @@ const SignInScreen = () => {
   const { signIn, isSignedIn } = useContext(AuthContext); // isSignedIn 가져오기
 
   const handleSignIn = () => {
+    AsyncStorage.setItem('email', email);
     axios
       .post(
         'http://ec2-43-200-8-47.ap-northeast-2.compute.amazonaws.com:8080/auth/login',
