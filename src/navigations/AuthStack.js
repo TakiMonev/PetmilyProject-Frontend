@@ -5,6 +5,7 @@ import SignUpScreen from '../screens/SignUpScreen';
 import Navigation from './Navigation';
 import { AuthRoutes } from './routes';
 import HomeScreen from '../screens/HomeScreen';
+import UserInfoScreen from '../screens/UserInfoScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -17,6 +18,7 @@ const AuthStack = () => {
       <Stack.Screen name={AuthRoutes.SIGN_UP} component={SignUpScreen} />
       <Stack.Screen name={AuthRoutes.NAVIGATION} component={Navigation} />
       <Stack.Screen name={AuthRoutes.HOME} component={HomeScreen} />
+      <Stack.Screen name={AuthRoutes.UserInfo} component={UserInfoScreen} />
       <Stack.Screen name={AuthRoutes.ENTIRE} component={PetMainScreen} />
     </Stack.Navigator>
   );
