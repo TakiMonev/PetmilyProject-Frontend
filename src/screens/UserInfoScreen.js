@@ -2,9 +2,45 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
-import TabStackScreen from '../navigations/Nest';
 import axios from 'axios';
-const UserInfoScreen = ({ Navigation, routes }) => {
+
+const UserInfoScreen = () => {
+  const [email, setEmail] = useState('');
+  const [userName, setUserName] = useState('');
+  const navigation = useNavigation();
+
+  // AsyncStorage에서 토큰과 이메일을 가져옵니다.
+  useEffect(() => {
+    AsyncStorage.getItem('email')
+      .then((myEmail) => {
+        AsyncStorage.getItem('token')
+          .then((token) => {
+            axios
+              .get(
+                `http://ec2-43-200-8-47.ap-northeast-2.compute.amazonaws.com:8080/users/${myEmail}`,
+                {
+                  headers: {
+                    Authorization: `Bearer ${token}`,
+                  },
+                }
+              )
+              .then((response) => {
+                setEmail(response.data.email);
+                setUserName(response.data.name);
+              })
+              .catch((error) => {
+                console.error(error);
+              });
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
+
   return (
     <View style={styles.container}>
       {/* 강아지 사진과 이름 */}
@@ -13,7 +49,8 @@ const UserInfoScreen = ({ Navigation, routes }) => {
           style={styles.dogImage}
           source={require('../assets/pet_icon.png')}
         />
-        <Text style={styles.nameText}>d</Text>
+        <Text style={styles.nameText}>이메일 : {email}</Text>
+        <Text style={styles.nameText}>닉네임 : {userName}</Text>
       </View>
 
       {/* 등록된 양육자와 사진 */}
@@ -23,7 +60,7 @@ const UserInfoScreen = ({ Navigation, routes }) => {
           style={styles.userImage}
           source={require('../assets/defaultimage.png')}
         />
-        <Text style={styles.userText}>John Doe</Text>
+        <Text style={styles.userText}>엄마</Text>
       </View>
 
       {/* 로그아웃과 회원탈퇴 버튼 */}
