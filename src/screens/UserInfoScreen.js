@@ -1,19 +1,10 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
 import TabStackScreen from '../navigations/Nest';
-
+import axios from 'axios';
 const UserInfoScreen = ({ Navigation, routes }) => {
-  const handleLogout = async () => {
-    try {
-      await AsyncStorage.removeItem('userToken');
-      <TabStackScreen />;
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
   return (
     <View style={styles.container}>
       {/* 강아지 사진과 이름 */}
@@ -22,7 +13,7 @@ const UserInfoScreen = ({ Navigation, routes }) => {
           style={styles.dogImage}
           source={require('../assets/pet_icon.png')}
         />
-        <Text style={styles.nameText}>Max</Text>
+        <Text style={styles.nameText}>d</Text>
       </View>
 
       {/* 등록된 양육자와 사진 */}
@@ -37,7 +28,7 @@ const UserInfoScreen = ({ Navigation, routes }) => {
 
       {/* 로그아웃과 회원탈퇴 버튼 */}
       <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.button} onPress={handleLogout}>
+        <TouchableOpacity style={styles.button}>
           <Text style={styles.buttonText}>로그아웃</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.button}>
@@ -57,16 +48,18 @@ const styles = StyleSheet.create({
   },
   topContainer: {
     alignItems: 'center',
+    flexDirection: 'row',
   },
   dogImage: {
     width: 100,
     height: 100,
     borderRadius: 50,
+    marginLeft: 10,
   },
   nameText: {
     fontSize: 24,
     fontWeight: 'bold',
-    marginTop: 10,
+    marginLeft: 70,
   },
   userContainer: {
     flexDirection: 'row',

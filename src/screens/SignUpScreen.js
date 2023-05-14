@@ -18,7 +18,6 @@ import FirstScreen from './FirstScreen';
 const SignUpScreen = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  // const [passwordConfirm, setPasswordConfirm] = useState('');
   const [userName, setUserName] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [inviter, setInviter] = useState('');
@@ -30,19 +29,14 @@ const SignUpScreen = ({ navigation }) => {
         {
           email: email,
           password: password,
-          // passwordConfirm: passwordConfirm,
           userName: userName,
           phoneNumber: phoneNumber,
-          inviter: email,
         }
       )
       .then((response) => {
-        console.log(response);
-        Alert.alert('회원가입 성공', [
-          {
-            text: '확인',
-          },
-        ]);
+        //console.log(response);
+        setInviter(email);
+        navigation.goBack();
       })
       .catch((error) => {
         console.error('회원가입 실패:', error);
@@ -65,13 +59,6 @@ const SignUpScreen = ({ navigation }) => {
         placeholder="비밀번호"
         secureTextEntry={true}
       />
-      {/* <TextInput
-        style={styles.input}
-        value={passwordConfirm}
-        onChangeText={(text) => setPasswordConfirm(text)}
-        placeholder="비밀번호 확인"
-        secureTextEntry={true}
-      /> */}
       <TextInput
         style={styles.input}
         value={userName}

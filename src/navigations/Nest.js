@@ -4,7 +4,7 @@ import HomeScreen from '../screens/HomeScreen';
 import SignInScreen from '../screens/SignInScreen';
 import SignUpScreen from '../screens/SignUpScreen';
 import { createContext, useState } from 'react';
-import PetMainScreen from '../screens/PetMainScreen';
+import UserInfoScreen from '../screens/UserInfoScreen';
 import AddPetScreen from '../screens/AddPetScreen';
 import PetRegisterScreen from '../screens/PetRegister';
 import MypetsScreen from '../screens/AfterPetInfo/MyPetsScreen';
@@ -15,7 +15,6 @@ import FirstScreen from '../screens/FirstScreen';
 import React from 'react';
 import { View } from 'react-native';
 import AddSchduleScreen from '../screens/CarePet/AddScheduleScreen';
-import UserInfoScreen from '../screens/UserInfoScreen';
 
 const TabStack = createBottomTabNavigator();
 const AddPetStack = createStackNavigator();
@@ -57,7 +56,7 @@ const AddPetStackScreen = () => {
         component={PetRegisterScreen}
         options={{ title: '펫등록' }}
       />
-      <AddPetStack.Screen name="PetMain" component={PetMainScreen} />
+      <AddPetStack.Screen name="PetMain" component={UserInfoScreen} />
     </AddPetStack.Navigator>
   );
 };
@@ -86,7 +85,7 @@ const AddPetScheduleStackScreen = () => {
       /> */}
       <AddPetScheduleStack.Screen
         name="펫 일정"
-        component={PetMainScreen}
+        component={UserInfoScreen}
         options={{ headerShown: false }}
       />
       <AddPetScheduleStack.Screen
@@ -147,11 +146,7 @@ const TabStackScreen = () => {
     <AuthContext.Provider value={authContext}>
       <TabStack.Navigator>
         <TabStack.Screen name="ALBUM" component={HomeScreen} />
-        <TabStack.Screen
-          name="Main"
-          component={AddPetStackScreen}
-          options={{ headerShown: false }}
-        />
+        <TabStack.Screen name="펫 추가하기" component={AddPetStackScreen} />
         <TabStack.Screen
           name="AlbumStack"
           component={AlbumStackScreen}
