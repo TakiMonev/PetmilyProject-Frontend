@@ -26,7 +26,7 @@ const UserInfoScreen = () => {
               )
               .then((response) => {
                 setEmail(response.data.email);
-                setUserName(response.data.name);
+                setUserName(response.data.userName);
               })
               .catch((error) => {
                 console.error(error);
