@@ -11,10 +11,10 @@ import {
 import * as ImagePicker from 'expo-image-picker';
 import ScheduleList from './ScheduleList';
 import { Icon } from 'react-native-elements/dist/icons/Icon';
-import DatePicker from 'react-native-datepicker';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { AntDesign } from '@expo/vector-icons';
+import DatePicker from '../components/DatePicker';
 
 function PetMainScreen({ navigation, route }) {
   const [image, setImage] = useState(null);
@@ -94,17 +94,20 @@ function PetMainScreen({ navigation, route }) {
         <TouchableOpacity onPress={handlePrevDay} style={styles.arrowButton}>
           <AntDesign name="left" size={24} color="black" />
         </TouchableOpacity>
-        <DatePicker
-          style={styles.datepicker}
-          date={selectedDate}
-          mode="date"
-          placeholder="날짜 선택"
-          format="YYYY-MM-DD"
-          minDate="2021-01-01"
-          maxDate="2030-12-31"
-          onDateChange={setSelectedDate}
-          iconComponent={<View />} // 아이콘 제거
-        />
+        {
+          <DatePicker
+            style={styles.datepicker}
+            date={selectedDate}
+            mode="date"
+            placeholder="날짜 선택"
+            format="YYYY-MM-DD"
+            minDate="2021-01-01"
+            maxDate="2030-12-31"
+            onDateChange={setSelectedDate}
+            iconComponent={<View />} // 아이콘 제거
+          />
+        }
+
         <TouchableOpacity onPress={handleNextDay} style={styles.arrowButton}>
           <AntDesign name="right" size={24} color="black" />
         </TouchableOpacity>

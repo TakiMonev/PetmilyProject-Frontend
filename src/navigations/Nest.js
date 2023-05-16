@@ -5,8 +5,6 @@ import SignInScreen from '../screens/SignInScreen';
 import SignUpScreen from '../screens/SignUpScreen';
 import { createContext, useState } from 'react';
 import UserInfoScreen from '../screens/UserInfoScreen';
-import AddPetScreen from '../screens/AddPetScreen';
-import PetRegisterScreen from '../screens/PetRegister';
 import MypetsScreen from '../screens/AfterPetInfo/MyPetsScreen';
 import AddphotoScreen from '../screens/AfterPetInfo/AddPhotoScreen';
 import InitPhotoScreen from '../screens/AfterPetInfo/InitPhotoScreen';
@@ -15,6 +13,12 @@ import FirstScreen from '../screens/FirstScreen';
 import React from 'react';
 import { View } from 'react-native';
 import AddSchduleScreen from '../screens/CarePet/AddScheduleScreen';
+import EmptyPetProfileScreen from '../screens/AddPet/EmptyPetProfileScreen';
+import PetRegisterScreen from '../screens/AddPet/PetRegisterScreen';
+import { AddPetRoutes } from './routes';
+import PetProfileListScreen from '../screens/AddPet/PetProfileListScreen';
+import ComponentAMD from '../components/ComponentAMD';
+import PetMainScreen from '../screens/PetMainScreen';
 
 const TabStack = createBottomTabNavigator();
 const AddPetStack = createStackNavigator();
@@ -47,14 +51,19 @@ const AddPetStackScreen = () => {
   return (
     <AddPetStack.Navigator>
       <AddPetStack.Screen
-        name="AddPet"
-        component={AddPetScreen}
+        name={AddPetRoutes.EMPTY}
+        component={EmptyPetProfileScreen}
         options={{ headerShown: false }}
       />
       <AddPetStack.Screen
-        name="RegisterPet"
+        name={AddPetRoutes.REGISTER}
         component={PetRegisterScreen}
-        options={{ title: '펫등록' }}
+        options={{ headerShown: false }}
+      />
+      <AddPetStack.Screen
+        name={AddPetRoutes.LIST}
+        component={PetProfileListScreen}
+        options={{ headerShown: false }}
       />
       <AddPetStack.Screen name="PetMain" component={UserInfoScreen} />
     </AddPetStack.Navigator>
@@ -85,7 +94,7 @@ const AddPetScheduleStackScreen = () => {
       /> */}
       <AddPetScheduleStack.Screen
         name="펫 일정"
-        component={UserInfoScreen}
+        component={PetMainScreen}
         options={{ headerShown: false }}
       />
       <AddPetScheduleStack.Screen
@@ -153,11 +162,13 @@ const TabStackScreen = () => {
           options={{ headerShown: false }}
         />
 
-        {/* <TabStack.Screen
-          name="AddPetSchedule"
-          component={AddPetScheduleStackScreen}
-          options={{ headerShown: false }}
-        /> */}
+        {
+          <TabStack.Screen
+            name="AddPetSchedule"
+            component={AddPetScheduleStackScreen}
+            options={{ headerShown: false }}
+          />
+        }
 
         <TabStack.Screen
           name="UserInfo"

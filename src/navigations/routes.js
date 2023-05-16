@@ -15,3 +15,9 @@ export const ContentRoutes = {
   MAP: 'MAP',
   PROFILE: 'PROFILE',
 };
+//펫계정 등록 routes
+export const AddPetRoutes = {
+  EMPTY: 'EmptyPetProfileScreen',
+  LIST: 'PetProfileListScreen',
+  REGISTER: 'PetRegisterScreen',
+};
