@@ -12,7 +12,9 @@ const PetProfileListScreen = ({ navigation }) => {
   const route = useRoute();
   const [petProfiles, setPetProfiles] = useState([]);
   const { list, newPet } = route.params;
-  const { select, setSelect } = useState(false);
+  const [select, setSelect] = useState(false);
+  var inviter;
+  var id;
 
   const handleLongPressed = () => {
     console.log('길게누르기');
@@ -28,6 +30,7 @@ const PetProfileListScreen = ({ navigation }) => {
         const userData = response.data;
 
         const petData = userData.pets;
+        inviter = userData.inviter;
         setPetProfiles(petData);
       } catch (error) {
         console.log('Error fetching pet data:', error);
@@ -46,7 +49,7 @@ const PetProfileListScreen = ({ navigation }) => {
       // id: nanoid(),
       petName: newPet.name,
       // gender: newPet.gender,
-      //species: newPet.species,
+      // species: newPet.species,
       petAge: newPet.age,
       detailInfo: newPet.character,
     };
@@ -56,9 +59,9 @@ const PetProfileListScreen = ({ navigation }) => {
   const getImageUrl = async (id) => {
     try {
       const email = await AsyncStorage.getItem('email');
-      const url = `http://ec2-43-200-8-47.ap-northeast-2.compute.amazonaws.com:8080/pet/${email}/downloadImage/${id}`;
+      const url = `http://ec2-43-200-8-47.ap-northeast-2.compute.amazonaws.com:8080/pet/${inviter}/downloadImage/${id}.jpg`;
       const response = await axios.get(url);
-      return response.data;
+      return response.data.imageUrl;
     } catch (error) {
       console.log('Error fetching pet image:', error);
     }
