@@ -10,17 +10,17 @@ const ComponentAMD = ({ navigation, onPress }) => {
     <>
       <View style={styles.container}>
         <Pressable onPress={onPress}>
-          <Entypo name="circle-with-plus" size={40} color={YELLOW.DARK} />
+          <Entypo name="circle-with-plus" size={40} color={YELLOW.DEFAULT} />
         </Pressable>
         <MaterialCommunityIcons
           name="pencil-circle"
           size={40}
-          color={YELLOW.DARK}
+          color={YELLOW.DEFAULT}
         />
         <MaterialCommunityIcons
           name="delete-circle"
           size={40}
-          color={YELLOW.DARK}
+          color={YELLOW.DEFAULT}
         />
       </View>
     </>
@@ -29,11 +29,9 @@ const ComponentAMD = ({ navigation, onPress }) => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 0.2,
     flexDirection: 'row',
     alignItems: 'flex-end',
     justifyContent: 'flex-end',
-    margin: 15,
   },
 });
 

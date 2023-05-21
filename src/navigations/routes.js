@@ -20,4 +20,8 @@ export const AddPetRoutes = {
   EMPTY: 'EmptyPetProfileScreen',
   LIST: 'PetProfileListScreen',
   REGISTER: 'PetRegisterScreen',
+  MAIN_CARE_PET: 'MainCarePetScreen',
+  EMPTY_SCHDULE: 'EmptySchduleScreen',
+  ADD_SCHDULE: 'AddSchduleScreen',
+  LIST_SCHDULE: 'SchduleListScreen',
 };

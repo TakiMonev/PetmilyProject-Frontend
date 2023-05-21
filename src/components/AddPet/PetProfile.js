@@ -1,100 +1,52 @@
-import { useEffect, useState } from 'react';
-import axios from 'axios';
-import { ScrollView, StyleSheet, View } from 'react-native';
-import ComponentAMD from '../../components/ComponentAMD';
-import PetProfile from '../../components/AddPet/PetProfile';
-import { useRoute } from '@react-navigation/native';
-import { AddPetRoutes } from '../../navigations/routes';
-import { nanoid } from 'nanoid';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { GRAY } from '../../colors';
+import { View, Text, StyleSheet, Image, Pressable } from 'react-native';
+import { GRAY, WHITE, YELLOW } from '../../colors';
+import { useState } from 'react';
+import { AntDesign } from '@expo/vector-icons';
 
-const PetProfileListScreen = ({ navigation }) => {
-  const route = useRoute();
-  const [petProfiles, setPetProfiles] = useState([]);
-  const { list, newPet } = route.params;
-  const [select, setSelect] = useState(false);
-
-  const handleLongPressed = () => {
-    console.log('길게누르기');
-  };
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const email = await AsyncStorage.getItem('email');
-        const userUrl = `http://ec2-43-200-8-47.ap-northeast-2.compute.amazonaws.com:8080/users/${email}`;
-        const userResponse = await axios.get(userUrl);
-        const userData = userResponse.data;
-
-        const inviter = userData.inviter;
-        const petsUrl = `http://ec2-43-200-8-47.ap-northeast-2.compute.amazonaws.com:8080/pet/get-all/${inviter}`;
-        const petsResponse = await axios.get(petsUrl);
-        const petIds = petsResponse.data;
-
-        const petProfilesData = await Promise.all(
-          petIds.map(async (id) => {
-            const imageUrl = await getImageUrl(inviter, id);
-            return {
-              id,
-              imageUrl,
-            };
-          })
-        );
-
-        setPetProfiles(petProfilesData);
-      } catch (error) {
-        console.log('Error fetching pet data:', error);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  const AddPress = () => {
-    navigation.navigate(AddPetRoutes.REGISTER);
-  };
-
-  useEffect(() => {
-    const newPetProfile = {
-      id: nanoid(),
-      petName: newPet.name,
-      petAge: newPet.age,
-      detailInfo: newPet.character,
-    };
-    setPetProfiles((prevProfiles) => [...prevProfiles, newPetProfile]);
-  }, [newPet]);
-
-  const getImageUrl = async (inviter, id) => {
-    try {
-      const imageUrl = `http://ec2-43-200-8-47.ap-northeast-2.compute.amazonaws.com:8080/pet/${inviter}/downloadImage/${id}.jpg`;
-      const response = await axios.get(imageUrl);
-      return response.data;
-    } catch (error) {
-      console.log('Error fetching pet image:', error);
-    }
+const PetProfile = ({
+  key,
+  name,
+  age,
+  species,
+  set,
+  handleLongPressed,
+  onPress,
+  select,
+  imgurl,
+  profiles,
+  id,
+}) => {
+  //console.log(id);
+  const PetProfileItem = {
+    select: { select },
   };
 
   return (
     <>
-      <View style={styles.container}>
-        <ComponentAMD onPress={AddPress} navigation={navigation} />
-      </View>
-      <ScrollView style={styles.scroll}>
-        {petProfiles.map((profile) => (
-          <PetProfile
-            key={profile.id}
-            name={profile.petName}
-            age={profile.petAge}
-            species={profile.detailInfo}
-            gender={profile.gender}
-            character={profile.character}
-            handleLongPressed={handleLongPressed}
-            select={select}
-            imageUrl={profile.imageUrl}
-          />
-        ))}
-      </ScrollView>
+      <Pressable onLongPress={handleLongPressed} onPress={onPress}>
+        <View style={styles.main}>
+          <View style={styles.container}>
+            <Image
+              source={{ uri: imgurl }} // Use imgurl prop as the source
+              style={styles.image}
+            />
+            <View style={styles.container2}>
+              <View style={styles.nametitle}>
+                <Text style={styles.name}>{name}</Text>
+                <Text style={styles.age}>{age}살</Text>
+              </View>
+              <View style={styles.container3}>
+                <Text style={styles.content}>{species}</Text>
+                {/* <Text style={styles.content}>{gender}</Text>
+                <Text style={styles.content}>{character}</Text> */}
+              </View>
+            </View>
+            {PetProfileItem.select === true ? (
+              <AntDesign name="checkcircle" size={24} color="black" />
+            ) : null}
+          </View>
+        </View>
+      </Pressable>
     </>
   );
 };

@@ -5,20 +5,18 @@ import SignInScreen from '../screens/SignInScreen';
 import SignUpScreen from '../screens/SignUpScreen';
 import { createContext, useState } from 'react';
 import UserInfoScreen from '../screens/UserInfoScreen';
-import MypetsScreen from '../screens/AfterPetInfo/MyPetsScreen';
 import AddphotoScreen from '../screens/AfterPetInfo/AddPhotoScreen';
 import InitPhotoScreen from '../screens/AfterPetInfo/InitPhotoScreen';
 import PhotoViewScreen from '../screens/AfterPetInfo/PhotoViewScreen';
 import FirstScreen from '../screens/FirstScreen';
-import React from 'react';
-import { View } from 'react-native';
 import AddSchduleScreen from '../screens/CarePet/AddScheduleScreen';
 import EmptyPetProfileScreen from '../screens/AddPet/EmptyPetProfileScreen';
 import PetRegisterScreen from '../screens/AddPet/PetRegisterScreen';
 import { AddPetRoutes } from './routes';
 import PetProfileListScreen from '../screens/AddPet/PetProfileListScreen';
-import ComponentAMD from '../components/ComponentAMD';
 import PetMainScreen from '../screens/PetMainScreen';
+import EmptySchduleScreen from '../screens/CarePet/Schdule/EmptySchduleScreen';
+import MainCarePetScreen from '../screens/CarePet/MainCarePetScreen';
 
 const TabStack = createBottomTabNavigator();
 const AddPetStack = createStackNavigator();
@@ -63,6 +61,16 @@ const AddPetStackScreen = () => {
       <AddPetStack.Screen
         name={AddPetRoutes.LIST}
         component={PetProfileListScreen}
+        options={{ headerShown: false }}
+      />
+      <AddPetStack.Screen
+        name={AddPetRoutes.EMPTY_SCHDULE}
+        component={EmptySchduleScreen}
+        options={{ headerShown: false }}
+      />
+      <AddPetStack.Screen
+        name={AddPetRoutes.MAIN_CARE_PET}
+        component={MainCarePetScreen}
         options={{ headerShown: false }}
       />
       <AddPetStack.Screen name="PetMain" component={UserInfoScreen} />
