@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import SquareButton, { ColorTypes } from '../../components/Button';
-import { MAINCOLOR } from '../../colors';
+import { GRAY, MAINCOLOR } from '../../colors';
 
 const InitPhotoScreen = ({ navigation, route }) => {
   return (
@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 15,
     textAlign: 'center',
-    color: MAINCOLOR.DARKGRAY,
+    color: GRAY.DARK,
   },
 });
 
