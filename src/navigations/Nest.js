@@ -12,6 +12,7 @@ import AddphotoScreen from '../screens/AfterPetInfo/AddPhotoScreen';
 import InitPhotoScreen from '../screens/AfterPetInfo/InitPhotoScreen';
 import PhotoViewScreen from '../screens/AfterPetInfo/PhotoViewScreen';
 import FirstScreen from '../screens/FirstScreen';
+import PetMainScreen from '../screens/PetMainScreen';
 import React from 'react';
 import { View } from 'react-native';
 import AddSchduleScreen from '../screens/CarePet/AddScheduleScreen';
@@ -85,7 +86,7 @@ const AddPetScheduleStackScreen = () => {
       /> */}
       <AddPetScheduleStack.Screen
         name="펫 일정"
-        component={UserInfoScreen}
+        component={PetMainScreen}
         options={{ headerShown: false }}
       />
       <AddPetScheduleStack.Screen
@@ -153,11 +154,11 @@ const TabStackScreen = () => {
           options={{ headerShown: false }}
         />
 
-        {/* <TabStack.Screen
+        <TabStack.Screen
           name="AddPetSchedule"
           component={AddPetScheduleStackScreen}
           options={{ headerShown: false }}
-        /> */}
+        />
 
         <TabStack.Screen
           name="UserInfo"
