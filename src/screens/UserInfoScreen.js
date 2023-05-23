@@ -1,13 +1,25 @@
-// import React, { useState, useEffect } from 'react';
+// import React, { useState, useEffect, useContext } from 'react';
 // import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 // import AsyncStorage from '@react-native-async-storage/async-storage';
 // import { useNavigation } from '@react-navigation/native';
 // import axios from 'axios';
+// import { AuthContext } from '../navigations/Nest';
+// import FirstScreen from './FirstScreen';
 
 // const UserInfoScreen = () => {
 //   const [email, setEmail] = useState('');
 //   const [userName, setUserName] = useState('');
 //   const navigation = useNavigation();
+
+//   const [isSignedIn, setIsSignedIn] = useState(false);
+
+//   const signOut = () => {
+//     setIsSignedIn(false);
+//   };
+//   const authContext = {
+//     signIn: () => setIsSignedIn(true),
+//     signOut: () => setIsSignedIn(false),
+//   };
 
 //   // AsyncStorage에서 토큰과 이메일을 가져옵니다.
 //   useEffect(() => {
@@ -41,6 +53,20 @@
 //       });
 //   }, []);
 
+//   // 로그아웃 함수
+//   const handleLogout = async () => {
+//     try {
+//       // AsyncStorage에서 저장된 데이터를 삭제합니다.
+//       await AsyncStorage.multiRemove(['email', 'token']);
+
+//       // 로그인 화면으로 이동합니다.
+//       signOut();
+//       navigation.navigate(FirstScreen);
+//     } catch (error) {
+//       console.error(error);
+//     }
+//   };
+
 //   return (
 //     <View style={styles.container}>
 //       {/* 강아지 사진과 이름 */}
@@ -65,7 +91,7 @@
 
 //       {/* 로그아웃과 회원탈퇴 버튼 */}
 //       <View style={styles.buttonContainer}>
-//         <TouchableOpacity style={styles.button}>
+//         <TouchableOpacity style={styles.button} onPress={handleLogout}>
 //           <Text style={styles.buttonText}>로그아웃</Text>
 //         </TouchableOpacity>
 //         <TouchableOpacity style={styles.button}>
@@ -140,6 +166,7 @@ import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
 import { AuthContext } from '../navigations/Nest';
 import FirstScreen from './FirstScreen';
+import * as Update from 'expo-updates';
 
 const UserInfoScreen = () => {
   const [email, setEmail] = useState('');
@@ -191,14 +218,10 @@ const UserInfoScreen = () => {
   // 로그아웃 함수
   const handleLogout = async () => {
     try {
-      // AsyncStorage에서 저장된 데이터를 삭제합니다.
-      await AsyncStorage.multiRemove(['email', 'token']);
-
-      // 로그인 화면으로 이동합니다.
-      signOut();
-      navigation.navigate(FirstScreen);
+      AsyncStorage.clear();
+      // 이 부분에 로그아웃 네비게이션
     } catch (error) {
-      console.error(error);
+      console.log(error);
     }
   };
 
@@ -210,8 +233,14 @@ const UserInfoScreen = () => {
           style={styles.dogImage}
           source={require('../assets/pet_icon.png')}
         />
-        <Text style={styles.nameText}>이메일 : {email}</Text>
-        <Text style={styles.nameText}>닉네임 : {userName}</Text>
+        <View>
+          <Text style={styles.labelText}>이메일</Text>
+          <Text style={styles.valueText}>{email}</Text>
+        </View>
+        <View>
+          <Text style={styles.labelText}>닉네임</Text>
+          <Text style={styles.valueText}>{userName}</Text>
+        </View>
       </View>
 
       {/* 등록된 양육자와 사진 */}
@@ -252,12 +281,16 @@ const styles = StyleSheet.create({
     width: 100,
     height: 100,
     borderRadius: 50,
+  },
+  labelText: {
+    fontSize: 17,
+    fontWeight: 'bold',
     marginLeft: 10,
   },
-  nameText: {
-    fontSize: 24,
+  valueText: {
+    fontSize: 15,
     fontWeight: 'bold',
-    marginLeft: 70,
+    marginLeft: 10,
   },
   userContainer: {
     flexDirection: 'row',
