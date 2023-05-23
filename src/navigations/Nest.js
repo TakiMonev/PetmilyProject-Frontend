@@ -5,18 +5,19 @@ import SignInScreen from '../screens/SignInScreen';
 import SignUpScreen from '../screens/SignUpScreen';
 import { createContext, useState } from 'react';
 import UserInfoScreen from '../screens/UserInfoScreen';
-import AddphotoScreen from '../screens/AfterPetInfo/AddPhotoScreen';
-import InitPhotoScreen from '../screens/AfterPetInfo/InitPhotoScreen';
-import PhotoViewScreen from '../screens/AfterPetInfo/PhotoViewScreen';
 import FirstScreen from '../screens/FirstScreen';
 import AddSchduleScreen from '../screens/CarePet/AddScheduleScreen';
 import EmptyPetProfileScreen from '../screens/AddPet/EmptyPetProfileScreen';
 import PetRegisterScreen from '../screens/AddPet/PetRegisterScreen';
-import { AddPetRoutes } from './routes';
+import { AddPetRoutes, CarePetRoutes } from './routes';
 import PetProfileListScreen from '../screens/AddPet/PetProfileListScreen';
 import PetMainScreen from '../screens/PetMainScreen';
 import EmptySchduleScreen from '../screens/CarePet/Schdule/EmptySchduleScreen';
 import MainCarePetScreen from '../screens/CarePet/MainCarePetScreen';
+import AddphotoScreen from '../screens/CarePet/Photo/AddPhotoScreen';
+import ViewPhotoScreen from '../screens/CarePet/Photo/ViewPhotoScreen';
+import EmptyPhotoSceen from '../screens/CarePet/Photo/EmptyPhotoScreen';
+import ListPhotoScreen from '../screens/CarePet/Photo/ListPhotoScreen';
 
 const TabStack = createBottomTabNavigator();
 const AddPetStack = createStackNavigator();
@@ -48,6 +49,7 @@ export const AuthProvider = ({ children }) => {
 const AddPetStackScreen = () => {
   return (
     <AddPetStack.Navigator>
+      {/* AddPet */}
       <AddPetStack.Screen
         name={AddPetRoutes.EMPTY}
         component={EmptyPetProfileScreen}
@@ -63,14 +65,37 @@ const AddPetStackScreen = () => {
         component={PetProfileListScreen}
         options={{ headerShown: false }}
       />
+      {/* Care Pet */}
       <AddPetStack.Screen
-        name={AddPetRoutes.EMPTY_SCHDULE}
+        name={CarePetRoutes.MAIN_CARE_PET}
+        component={MainCarePetScreen}
+        options={{ headerShown: false }}
+      />
+      {/* Care Pet - 일정 */}
+      <AddPetStack.Screen
+        name={CarePetRoutes.EMPTY_SCHDULE}
         component={EmptySchduleScreen}
         options={{ headerShown: false }}
       />
+      {/* Care Pet - 사진첩 */}
       <AddPetStack.Screen
-        name={AddPetRoutes.MAIN_CARE_PET}
-        component={MainCarePetScreen}
+        name={CarePetRoutes.EMPTY_PHOTO}
+        component={EmptyPhotoSceen}
+        options={{ headerShown: false }}
+      />
+      <AddPetStack.Screen
+        name={CarePetRoutes.LIST_PHOTO}
+        component={ListPhotoScreen}
+        options={{ headerShown: false }}
+      />
+      <AddPetStack.Screen
+        name={CarePetRoutes.ADD_PHOTO}
+        component={AddphotoScreen}
+        options={{ headerShown: false }}
+      />
+      <AddPetStack.Screen
+        name={CarePetRoutes.VIEW_PHOTO}
+        component={ViewPhotoScreen}
         options={{ headerShown: false }}
       />
       <AddPetStack.Screen name="PetMain" component={UserInfoScreen} />
@@ -82,12 +107,13 @@ const AlbumStackScreen = () => {
   return (
     <AlbumStack.Navigator>
       <AlbumStack.Screen
-        name="InitPhoto"
-        component={InitPhotoScreen}
-        options={{ title: '공유사진첩' }}
+        name={CarePetRoutes.ADD_PHOTO}
+        component={AddphotoScreen}
       />
-      <AlbumStack.Screen name="AddPhoto" component={AddphotoScreen} />
-      <AlbumStack.Screen name="Album" component={PhotoViewScreen} />
+      <AlbumStack.Screen
+        name={CarePetRoutes.VIEW_PHOTO}
+        component={ViewPhotoScreen}
+      />
     </AlbumStack.Navigator>
   );
 };
@@ -162,24 +188,24 @@ const TabStackScreen = () => {
   return (
     <AuthContext.Provider value={authContext}>
       <TabStack.Navigator>
-        <TabStack.Screen name="ALBUM" component={HomeScreen} />
-        <TabStack.Screen name="펫 추가하기" component={AddPetStackScreen} />
+        <TabStack.Screen name="펫정보" component={HomeScreen} />
+        <TabStack.Screen name="일정" component={AddPetStackScreen} />
         <TabStack.Screen
-          name="AlbumStack"
+          name="메인"
           component={AlbumStackScreen}
           options={{ headerShown: false }}
         />
 
         {
           <TabStack.Screen
-            name="AddPetSchedule"
+            name="커뮤니티"
             component={AddPetScheduleStackScreen}
             options={{ headerShown: false }}
           />
         }
 
         <TabStack.Screen
-          name="UserInfo"
+          name="내정보"
           component={UserInfoStackScreen}
           options={{ headerShown: false }}
         />

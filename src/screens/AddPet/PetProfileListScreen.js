@@ -4,7 +4,7 @@ import { ScrollView, StyleSheet, Text, View, Image } from 'react-native';
 import ComponentAMD from '../../components/ComponentAMD';
 import PetProfile from '../../components/AddPet/PetProfile';
 import { useRoute } from '@react-navigation/native';
-import { AddPetRoutes } from '../../navigations/routes';
+import { AddPetRoutes, CarePetRoutes } from '../../navigations/routes';
 import { nanoid } from 'nanoid';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -19,7 +19,7 @@ const PetProfileListScreen = ({ navigation }) => {
   var cnt = 0;
   //petcare 이동
   const onPress = () => {
-    navigation.navigate(AddPetRoutes.MAIN_CARE_PET);
+    navigation.navigate(CarePetRoutes.MAIN_CARE_PET);
   };
   //펫 계정 수정 삭제
   const handleLongPressed = () => {
