@@ -12,7 +12,7 @@ import ListRearerScreen from './Rearer/ListRearerScreen';
 import { CarePetRoutes } from '../../navigations/routes';
 
 const MainCarePetScreen = ({ navigation }) => {
-  const [content, setContent] = useState('사진첩');
+  const [content, setContent] = useState('일정');
   const [schdule, setSchdule] = useState(null);
   const [health, setHealth] = useState(null);
   const [photo, setPhoto] = useState(true);
