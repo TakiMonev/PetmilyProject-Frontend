@@ -5,13 +5,13 @@ import { BLACK } from '../../../colors';
 import { color } from 'react-native-reanimated';
 import { YELLOW } from '../../../colors';
 import ComponentAMD from '../../../components/ComponentAMD';
+import { CarePetRoutes } from '../../../navigations/routes';
 
-const CarePetList = () => {
-  const [schdueltextColor, setSchduleTextColor] = useState(BLACK);
+const CarePetList = ({ navigation, content, subconst, onAddPress }) => {
+  const [schdueltextColor, setSchduleTextColor] = useState(YELLOW.DARK);
   const [healthtextColor, setHealthTextColor] = useState(BLACK);
   const [phototextColor, setPhotoTextColor] = useState(BLACK);
   const [rearertextColor, setRearerTextColor] = useState(BLACK);
-  const [content, setContent] = useState('일정');
 
   const onSchdulePress = () => {
     setSchduleTextColor(YELLOW.DARK);
@@ -44,31 +44,31 @@ const CarePetList = () => {
   });
   return (
     <View style={styles.container}>
-      <View style={styles.container_row}>
-        <Image
-          source={require('../../../assets/pet_icon.png')}
-          style={styles.image}
-        />
-        <View style={styles.container_content}>
-          <View style={styles.container_name}>
-            <Text style={styles.name}>이월이</Text>
+      <View style={{ paddingRight: 60 }}>
+        <View style={styles.container_row}>
+          <View style={{}}>
+            <Image
+              source={require('../../../assets/pet_icon.png')}
+              style={styles.image}
+            />
           </View>
-          <View style={styles.container_row}>
-            <Pressable onPress={onSchdulePress}>
-              <Text style={textStyle.schdule}>일 정 </Text>
-            </Pressable>
-            <Text> | </Text>
-            <Pressable onPress={onHelathPress}>
-              <Text style={{ color: healthtextColor }}> 건 강 </Text>
-            </Pressable>
-            <Text> | </Text>
-            <Pressable onPress={onPhotoPress}>
-              <Text style={{ color: phototextColor }}> 사 진 첩 </Text>
-            </Pressable>
-            <Text> | </Text>
-            <Pressable onPress={onRearePress}>
-              <Text style={{ color: rearertextColor }}> 양 육 자 </Text>
-            </Pressable>
+          <View style={styles.container_content}>
+            <View style={styles.container_name}>
+              <Text style={styles.name}>이월이</Text>
+            </View>
+            <View style={styles.container_row}>
+              <Pressable onPress={onSchdulePress}>
+                <Text style={textStyle.schdule}>일 정 </Text>
+              </Pressable>
+              <Text> | </Text>
+              <Pressable onPress={onPhotoPress}>
+                <Text style={{ color: phototextColor }}> 사 진 첩 </Text>
+              </Pressable>
+              <Text> | </Text>
+              <Pressable onPress={onRearePress}>
+                <Text style={{ color: rearertextColor }}> 양 육 자 </Text>
+              </Pressable>
+            </View>
           </View>
         </View>
       </View>
@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
   componentAMD: {
     width: '100%',
     justifyContent: 'flex-end',
-    marginRight: 80,
+    marginRight: 30,
   },
   container_content: { padding: 10, marginTop: 15 },
   container_name: {

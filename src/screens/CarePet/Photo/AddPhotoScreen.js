@@ -1,7 +1,8 @@
 import { Text, View, StyleSheet, TextInput, Button } from 'react-native';
-import DatePicker from '../../components/DatePicker';
-import TimePicker from '../../components/TimePicker';
-import ImagePickerComponent from '../../components/ImagePicker';
+import ImagePickerComponent from '../../../components/ImagePicker';
+import { CarePetRoutes } from '../../../navigations/routes';
+import DatePicker from '../../../components/DatePicker';
+import TimePicker from '../../../components/TimePicker';
 
 const AddphotoScreen = ({ navigation, route }) => {
   return (
@@ -24,7 +25,7 @@ const AddphotoScreen = ({ navigation, route }) => {
           <Button
             style={styles.Button}
             title="등록"
-            onPress={() => navigation.navigate('Album')}
+            onPress={() => navigation.navigate(CarePetRoutes.LIST_PHOTO)}
           ></Button>
           <Button title="취소"></Button>
         </View>
