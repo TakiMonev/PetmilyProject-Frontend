@@ -24,7 +24,7 @@ export const AddPetRoutes = {
 export const CarePetRoutes = {
   MAIN_CARE_PET: 'MainCarePetScreen',
   EMPTY_SCHDULE: 'EmptySchduleScreen',
-  ADD_SCHDULE: 'AddSchduleScreen',
+  ADD_SCHDULE: 'AddScheduleScreen',
   LIST_SCHDULE: 'SchduleListScreen',
   EMPTY_PHOTO: 'EmptyPhotoScreen',
   ADD_PHOTO: 'AddPhotoScreen',

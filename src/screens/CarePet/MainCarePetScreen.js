@@ -5,7 +5,7 @@ import { useState } from 'react';
 import EmptyPhotoSceen from './Photo/EmptyPhotoScreen';
 import EmptyRearerScreen from './Rearer/EmptyRearerScreen';
 import EmptyHealthScreen from './Health/EmptyHealthScreen';
-import SchduleListScreen from './Schdule/SchduleListScreen';
+import ScheduleListScreen from './Schdule/ScheduleListScreen';
 import ListPhotoScreen from './Photo/ListPhotoScreen';
 import ListHealthScreen from './Health/ListHealthScreen';
 import ListRearerScreen from './Rearer/ListRearerScreen';
@@ -13,7 +13,7 @@ import { CarePetRoutes } from '../../navigations/routes';
 
 const MainCarePetScreen = ({ navigation }) => {
   const [content, setContent] = useState('일정');
-  const [schdule, setSchdule] = useState(null);
+  const [schdule, setSchdule] = useState('');
   const [health, setHealth] = useState(null);
   const [photo, setPhoto] = useState(true);
   const [rearer, setRearer] = useState(null);
@@ -29,7 +29,7 @@ const MainCarePetScreen = ({ navigation }) => {
 
   const renderScreen = () => {
     if (content === '일정') {
-      return schdule === null ? <EmptySchduleScreen /> : <SchduleListScreen />;
+      return schdule === null ? <EmptySchduleScreen /> : <ScheduleListScreen />;
     } else if (content === '사진첩') {
       return photo === null ? (
         <EmptyPhotoSceen />

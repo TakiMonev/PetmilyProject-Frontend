@@ -9,7 +9,7 @@ import FirstScreen from '../screens/FirstScreen';
 import React from 'react';
 import { View } from 'react-native';
 
-import AddSchduleScreen from '../screens/CarePet/AddScheduleScreen';
+import AddScheduleScreen from '../screens/CarePet/Schdule/AddScheduleScreen';
 import EmptyPetProfileScreen from '../screens/AddPet/EmptyPetProfileScreen';
 import PetRegisterScreen from '../screens/AddPet/PetRegisterScreen';
 import { AddPetRoutes, CarePetRoutes } from './routes';
@@ -80,6 +80,11 @@ const AddPetStackScreen = () => {
         component={EmptySchduleScreen}
         options={{ headerShown: false }}
       />
+      <AddPetStack.Screen
+        name={CarePetRoutes.ADD_SCHDULE}
+        component={AddScheduleScreen}
+        options={{ headerShown: false }}
+      />
       {/* Care Pet - 사진첩 */}
       <AddPetStack.Screen
         name={CarePetRoutes.EMPTY_PHOTO}
@@ -136,7 +141,7 @@ const AddPetScheduleStackScreen = () => {
       />
       <AddPetScheduleStack.Screen
         name="AddPetSchedule"
-        component={AddSchduleScreen}
+        component={AddScheduleScreen}
         options={{ title: '일정 추가' }}
       />
     </AddPetScheduleStack.Navigator>
