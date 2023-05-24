@@ -18,6 +18,7 @@ import AddphotoScreen from '../screens/CarePet/Photo/AddPhotoScreen';
 import ViewPhotoScreen from '../screens/CarePet/Photo/ViewPhotoScreen';
 import EmptyPhotoSceen from '../screens/CarePet/Photo/EmptyPhotoScreen';
 import ListPhotoScreen from '../screens/CarePet/Photo/ListPhotoScreen';
+import ShowPetProfileScreen from '../screens/AddPet/ShowPetProfileScreen';
 
 const TabStack = createBottomTabNavigator();
 const AddPetStack = createStackNavigator();
@@ -50,7 +51,7 @@ const AddPetStackScreen = () => {
   return (
     <AddPetStack.Navigator>
       {/* AddPet */}
-      <AddPetStack.Screen
+      {/* <AddPetStack.Screen
         name={AddPetRoutes.EMPTY}
         component={EmptyPetProfileScreen}
         options={{ headerShown: false }}
@@ -59,10 +60,10 @@ const AddPetStackScreen = () => {
         name={AddPetRoutes.REGISTER}
         component={PetRegisterScreen}
         options={{ headerShown: false }}
-      />
+      /> */}
       <AddPetStack.Screen
         name={AddPetRoutes.LIST}
-        component={PetProfileListScreen}
+        component={ShowPetProfileScreen}
         options={{ headerShown: false }}
       />
       {/* Care Pet */}
