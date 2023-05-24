@@ -36,11 +36,11 @@ const PetProfileListScreen = ({ navigation }) => {
         const userData = response.data;
 
         petData = userData.pets;
-        inviter = userData.inviter;
+        //inviter = userData.inviter;
         setPetProfiles(petData);
         petData.forEach(function (pet) {
           petProfiles2.push(pet);
-          getImageUrl(pet.id);
+          getImageUrl(pet.inviter, pet.id);
         });
       } catch (error) {
         console.log('Error fetching pet data:', error);
@@ -54,7 +54,7 @@ const PetProfileListScreen = ({ navigation }) => {
     navigation.navigate(AddPetRoutes.REGISTER);
   };
 
-  const getImageUrl = async (id) => {
+  const getImageUrl = async (inviter, id) => {
     try {
       const email = await AsyncStorage.getItem('email');
       const url = `http://ec2-43-200-8-47.ap-northeast-2.compute.amazonaws.com:8080/pet/${inviter}/downloadImage/${id}.jpg`;

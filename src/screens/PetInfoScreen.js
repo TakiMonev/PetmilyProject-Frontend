@@ -4,7 +4,7 @@ import { Header, Button } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
 import { MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons';
 import MypetsScreen from './AfterPetInfo/MyPetsScreen';
-import AddPetScreen from './AfterPetInfo/AddPetScreen';
+//import AddPetScreen from './AfterPetInfo/AddPetScreen';
 
 export default function PetInfoScreen() {
   const [data, setData] = useState(null);
