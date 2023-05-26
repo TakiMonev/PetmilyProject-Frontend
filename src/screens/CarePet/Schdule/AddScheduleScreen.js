@@ -17,7 +17,6 @@ const AddScheduleScreen = ({ navigation, route }) => {
 
   const handleScheduleSubmit = () => {
     setPetName('초코');
-    setInviter('lsyun1234@naver.com');
 
     // 서버에 일정 데이터를 POST 요청으로 보냄
     AsyncStorage.getItem('inviter')
@@ -28,7 +27,7 @@ const AddScheduleScreen = ({ navigation, route }) => {
               .then((petName) => {
                 axios
                   .post(
-                    `http://ec2-43-200-8-47.ap-northeast-2.compute.amazonaws.com:8080/schedule/${'inviter'}/${petName}`,
+                    `http://ec2-43-200-8-47.ap-northeast-2.compute.amazonaws.com:8080/schedule/${inviter}/${petName}`,
                     {
                       schedule: schedule,
                       date: date,

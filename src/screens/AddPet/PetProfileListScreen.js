@@ -18,9 +18,10 @@ const PetProfileListScreen = ({ navigation }) => {
   var petData;
   var cnt = 0;
   //petcare 이동
-  const onPress = () => {
-    navigation.navigate(CarePetRoutes.MAIN_CARE_PET);
+  const onPress = (petName) => {
+    navigation.navigate(CarePetRoutes.MAIN_CARE_PET, petName);
   };
+  
   //펫 계정 수정 삭제
   const handleLongPressed = () => {
     console.log('길게누르기');
@@ -86,7 +87,7 @@ const PetProfileListScreen = ({ navigation }) => {
             species={profile.detailInfo}
             imgurl={profile.imgurl}
             handleLongPressed={handleLongPressed}
-            onPress={onPress}
+            onPress={() => onPress(profile.petName)}
             select={select}
             id={profile.id}
           />

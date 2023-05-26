@@ -1,7 +1,7 @@
 import { View, StyleSheet, Text } from 'react-native';
 import CarePetList from './Component/CarePetList';
 import EmptySchduleScreen from './Schdule/EmptySchduleScreen';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import EmptyPhotoSceen from './Photo/EmptyPhotoScreen';
 import EmptyRearerScreen from './Rearer/EmptyRearerScreen';
 import EmptyHealthScreen from './Health/EmptyHealthScreen';
@@ -10,8 +10,12 @@ import ListPhotoScreen from './Photo/ListPhotoScreen';
 import ListHealthScreen from './Health/ListHealthScreen';
 import ListRearerScreen from './Rearer/ListRearerScreen';
 import { CarePetRoutes } from '../../navigations/routes';
+import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useRoute } from '@react-navigation/native';
 
-const MainCarePetScreen = ({ navigation }) => {
+const MainCarePetScreen = ({ navigation, route }) => {
+  const petName = route.params;
   const [content, setContent] = useState('일정');
   const [schdule, setSchdule] = useState('');
   const [health, setHealth] = useState(null);
@@ -23,9 +27,34 @@ const MainCarePetScreen = ({ navigation }) => {
       navigation.navigate(CarePetRoutes.ADD_PHOTO);
     }
   };
+
   const onPress = () => {
     navigation.navigate(CarePetRoutes.VIEW_PHOTO);
   };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const email = await AsyncStorage.getItem('email');
+        const url = `http://ec2-43-200-8-47.ap-northeast-2.compute.amazonaws.com:8080/schedule/${email}/${petName}`;
+        console.log(url);
+
+        const response = await axios.get(url);
+        const responseData = response.data;
+        console.log(response.data);
+
+        // Update the state based on the response data
+        setSchdule(responseData.schedule);
+        setHealth(responseData.health);
+        setPhoto(responseData.photo);
+        setRearer(responseData.rearer);
+      } catch (error) {
+        console.log('Error fetching pet data:', error);
+      }
+    };
+
+    fetchData();
+  }, [petName]);
 
   const renderScreen = () => {
     if (content === '일정') {
