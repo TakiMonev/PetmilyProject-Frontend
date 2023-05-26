@@ -54,7 +54,7 @@ const AddPetStackScreen = () => {
   return (
     <AddPetStack.Navigator>
       {/* AddPet */}
-      {/* <AddPetStack.Screen
+      <AddPetStack.Screen
         name={AddPetRoutes.EMPTY}
         component={EmptyPetProfileScreen}
         options={{ headerShown: false }}
@@ -63,10 +63,10 @@ const AddPetStackScreen = () => {
         name={AddPetRoutes.REGISTER}
         component={PetRegisterScreen}
         options={{ headerShown: false }}
-      /> */}
+      />
       <AddPetStack.Screen
         name={AddPetRoutes.LIST}
-        component={ShowPetProfileScreen}
+        component={PetProfileListScreen}
         options={{ headerShown: false }}
       />
       {/* Care Pet */}
@@ -197,18 +197,18 @@ const TabStackScreen = () => {
   return (
     <AuthContext.Provider value={authContext}>
       <TabStack.Navigator>
-        <TabStack.Screen name="펫정보" component={HomeScreen} />
-        <TabStack.Screen name="일정" component={AddPetStackScreen} />
         <TabStack.Screen
           name="메인"
-          component={AlbumStackScreen}
+          component={AddPetStackScreen}
           options={{ headerShown: false }}
         />
+        {/* <TabStack.Screen name="펫정보" component={HomeScreen} /> */}
+        <TabStack.Screen name="캘린더" component={AlbumStackScreen} />
 
         {
           <TabStack.Screen
             name="커뮤니티"
-            component={AddPetScheduleStackScreen}
+            component={ListPhotoScreen}
             options={{ headerShown: false }}
           />
         }
