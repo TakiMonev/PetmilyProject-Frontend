@@ -7,7 +7,6 @@ const App = () => {
       <StatusBar style="dark" />
       {/* <FirstScreen /> */}
       <Navigation />
-      {/* <PetMainScreen /> */}
     </>
   );
 };

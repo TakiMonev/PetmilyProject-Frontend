@@ -1,15 +1,11 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
-import HomeScreen from '../screens/HomeScreen';
 import SignInScreen from '../screens/SignInScreen';
 import SignUpScreen from '../screens/SignUpScreen';
 import { createContext, useState } from 'react';
 import UserInfoScreen from '../screens/UserInfoScreen';
 import FirstScreen from '../screens/FirstScreen';
-import React from 'react';
-import { View } from 'react-native';
-
-import AddSchduleScreen from '../screens/CarePet/AddScheduleScreen';
+import AddScheduleScreen from '../screens/CarePet/Schdule/AddScheduleScreen';
 import EmptyPetProfileScreen from '../screens/AddPet/EmptyPetProfileScreen';
 import PetRegisterScreen from '../screens/AddPet/PetRegisterScreen';
 import { AddPetRoutes, CarePetRoutes } from './routes';
@@ -22,6 +18,7 @@ import ViewPhotoScreen from '../screens/CarePet/Photo/ViewPhotoScreen';
 import EmptyPhotoSceen from '../screens/CarePet/Photo/EmptyPhotoScreen';
 import ListPhotoScreen from '../screens/CarePet/Photo/ListPhotoScreen';
 import ViewCalender from '../screens/Calender/ViewCalender';
+import ShowPetProfileScreen from '../screens/AddPet/ShowPetProfileScreen';
 
 const TabStack = createBottomTabNavigator();
 const AddPetStack = createStackNavigator();
@@ -64,12 +61,12 @@ const AddPetStackScreen = () => {
       <AddPetStack.Screen
         name={AddPetRoutes.REGISTER}
         component={PetRegisterScreen}
-        options={{ headerShown: false }}
+        options={{ title: '펫등록' }}
       />
       <AddPetStack.Screen
         name={AddPetRoutes.LIST}
         component={PetProfileListScreen}
-        options={{ headerShown: false }}
+        options={{ title: '메인' }}
       />
       {/* Care Pet */}
       <AddPetStack.Screen
@@ -81,6 +78,11 @@ const AddPetStackScreen = () => {
       <AddPetStack.Screen
         name={CarePetRoutes.EMPTY_SCHDULE}
         component={EmptySchduleScreen}
+        options={{ headerShown: false }}
+      />
+      <AddPetStack.Screen
+        name={CarePetRoutes.ADD_SCHDULE}
+        component={AddScheduleScreen}
         options={{ headerShown: false }}
       />
       {/* Care Pet - 사진첩 */}
@@ -139,7 +141,7 @@ const AddPetScheduleStackScreen = () => {
       />
       <AddPetScheduleStack.Screen
         name="AddPetSchedule"
-        component={AddSchduleScreen}
+        component={AddScheduleScreen}
         options={{ title: '일정 추가' }}
       />
     </AddPetScheduleStack.Navigator>
@@ -194,18 +196,18 @@ const TabStackScreen = () => {
   return (
     <AuthContext.Provider value={authContext}>
       <TabStack.Navigator>
-        <TabStack.Screen name="펫정보" component={ViewCalender} />
-        <TabStack.Screen name="일정" component={AddPetStackScreen} />
         <TabStack.Screen
           name="메인"
-          component={AlbumStackScreen}
+          component={AddPetStackScreen}
           options={{ headerShown: false }}
         />
+        {/* <TabStack.Screen name="펫정보" component={HomeScreen} /> */}
+        <TabStack.Screen name="캘린더" component={ViewCalender} />
 
         {
           <TabStack.Screen
             name="커뮤니티"
-            component={AddPetScheduleStackScreen}
+            component={ListPhotoScreen}
             options={{ headerShown: false }}
           />
         }

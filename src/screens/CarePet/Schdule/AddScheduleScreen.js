@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { Button, Pressable, StyleSheet, TextInput } from 'react-native';
 import { Text, View } from 'react-native';
 import axios from 'axios';
-import DatePicker from '../../components/DatePicker';
-import TimePicker from '../../components/TimePicker';
+import DatePicker from '../../../components/DatePicker';
+import TimePicker from '../../../components/TimePicker';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const AddScheduleScreen = ({ navigation, route }) => {

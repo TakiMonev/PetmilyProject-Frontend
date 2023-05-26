@@ -1,14 +1,17 @@
-import { View, StyleSheet, Text } from 'react-native';
-import { Calendar } from 'react-native-calendars';
-import { WHITE, YELLOW } from '../../colors';
-import { color } from 'react-native-reanimated';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import {
+  View,
+  Text,
+  FlatList,
+  StyleSheet,
+  TouchableOpacity,
+} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
-import { FlatList, TouchableOpacity } from 'react-native-gesture-handler';
 
-const ViewCalender = () => {
+function ScheduleListScreen() {
   const [responseData, setResponseData] = useState([]);
+
   // 서버에서 일정 데이터를 가져오는 비동기 함수
   useEffect(() => {
     AsyncStorage.getItem('schedule')
@@ -49,42 +52,19 @@ const ViewCalender = () => {
   );
 
   return (
-    <View style={styles.container}>
-      <Calendar style={styles.calendar} />
-      <View>
-        <Text
-          style={{
-            marginLeft: 10,
-            marginTop: 20,
-            fontSize: 18,
-            color: YELLOW.DEFAULT,
-            fontWeight: '700',
-          }}
-        >
-          예정된 일정
-        </Text>
-        <FlatList
-          data={responseData}
-          renderItem={renderItem}
-          keyExtractor={(item) => item.id.toString()}
-          style={styles.container2}
-        />
-      </View>
+    <View>
+      <FlatList
+        data={responseData}
+        renderItem={renderItem}
+        keyExtractor={(item) => item.id.toString()}
+        style={styles.container}
+      />
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    marginBottom: 20,
-    backgroundColor: WHITE,
-  },
-  calendar: {
-    borderBottomWidth: 1,
-    borderBottomColor: WHITE,
-  },
-  container2: {
     marginTop: 30,
   },
   scheduleItem: {
@@ -106,4 +86,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ViewCalender;
+export default ScheduleListScreen;
