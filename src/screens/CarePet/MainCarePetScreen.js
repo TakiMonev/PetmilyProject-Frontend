@@ -12,15 +12,17 @@ import ListRearerScreen from './Rearer/ListRearerScreen';
 import { CarePetRoutes } from '../../navigations/routes';
 
 const MainCarePetScreen = ({ navigation }) => {
-  const [content, setContent] = useState('일정');
+  const [content, setContent] = useState('사진첩');
   const [schdule, setSchdule] = useState('');
   const [health, setHealth] = useState(null);
   const [photo, setPhoto] = useState(true);
   const [rearer, setRearer] = useState(null);
 
   const onAddPress = () => {
-    if (content === '일정') {
-      navigation.navigate(CarePetRoutes.ADD_PHOTO);
+    if (content === '사진첩') {
+      return navigation.navigate(CarePetRoutes.ADD_PHOTO);
+    } else if (content === '일정') {
+      return navigation.navigate(CarePetRoutes.ADD_SCHDULE);
     }
   };
   const onPress = () => {
@@ -36,8 +38,6 @@ const MainCarePetScreen = ({ navigation }) => {
       ) : (
         <ListPhotoScreen onPress={onPress} />
       );
-    } else if (content === '건강') {
-      return health === null ? <EmptyHealthScreen /> : <ListHealthScreen />;
     } else if (content === '양육자') {
       return rearer === null ? <EmptyRearerScreen /> : <ListRearerScreen />;
     } else {

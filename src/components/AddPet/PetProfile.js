@@ -16,7 +16,6 @@ const PetProfile = ({
   profiles,
   id,
 }) => {
-  //console.log(id);
   const PetProfileItem = {
     select: { select },
   };

@@ -99,12 +99,12 @@ const AddPetStackScreen = () => {
       <AddPetStack.Screen
         name={CarePetRoutes.ADD_PHOTO}
         component={AddphotoScreen}
-        options={{ headerShown: false }}
+        options={{ title: '사진등록' }}
       />
       <AddPetStack.Screen
         name={CarePetRoutes.VIEW_PHOTO}
         component={ViewPhotoScreen}
-        options={{ headerShown: false }}
+        options={{ title: '사진상세' }}
       />
       <AddPetStack.Screen name="PetMain" component={UserInfoScreen} />
     </AddPetStack.Navigator>
