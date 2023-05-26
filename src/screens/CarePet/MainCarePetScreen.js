@@ -37,11 +37,9 @@ const MainCarePetScreen = ({ navigation, route }) => {
       try {
         const email = await AsyncStorage.getItem('email');
         const url = `http://ec2-43-200-8-47.ap-northeast-2.compute.amazonaws.com:8080/schedule/${email}/${petName}`;
-        console.log(url);
 
         const response = await axios.get(url);
         const responseData = response.data;
-        console.log(response.data);
 
         // Update the state based on the response data
         setSchdule(responseData.schedule);
@@ -58,7 +56,7 @@ const MainCarePetScreen = ({ navigation, route }) => {
 
   const renderScreen = () => {
     if (content === '일정') {
-      return schdule === null ? <EmptySchduleScreen /> : <ScheduleListScreen />;
+      return schdule === null ? <EmptySchduleScreen /> : <ScheduleListScreen petName={petName} />;
     } else if (content === '사진첩') {
       return photo === null ? (
         <EmptyPhotoSceen />
