@@ -9,7 +9,7 @@ import ScheduleListScreen from './Schdule/ScheduleListScreen';
 import ListPhotoScreen from './Photo/ListPhotoScreen';
 import ListHealthScreen from './Health/ListHealthScreen';
 import ListRearerScreen from './Rearer/ListRearerScreen';
-import { CarePetRoutes } from '../../navigations/routes';
+import { AddPetRoutes, CarePetRoutes } from '../../navigations/routes';
 
 const MainCarePetScreen = ({ navigation }) => {
   const [content, setContent] = useState('일정');
@@ -19,10 +19,12 @@ const MainCarePetScreen = ({ navigation }) => {
   const [rearer, setRearer] = useState(null);
 
   const onAddPress = () => {
+    navigation.navigate(AddPetRoutes);
     if (content === '일정') {
       navigation.navigate(CarePetRoutes.ADD_PHOTO);
     }
   };
+
   const onPress = () => {
     navigation.navigate(CarePetRoutes.VIEW_PHOTO);
   };

@@ -72,8 +72,8 @@ const CarePetList = ({ navigation, content, subconst, onAddPress }) => {
           </View>
         </View>
       </View>
-      <View style={styles.componentAMD}>
-        <ComponentAMD />
+      <View style={styles.componentAMD2}>
+        <ComponentAMD onPress={AddPress} navigation={navigation} />
       </View>
     </View>
   );
@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
   container_row: {
     flexDirection: 'row',
   },
-  componentAMD: {
+  componentAMD2: {
     width: '100%',
     justifyContent: 'flex-end',
     marginRight: 30,
