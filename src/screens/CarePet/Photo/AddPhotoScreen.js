@@ -10,7 +10,9 @@ import SquareButton, { ColorTypes } from '../../../components/Button';
 
 const AddphotoScreen = ({ navigation, route }) => {
   const [imgUrl, setImgUrl] = useState(null);
-
+  const onPress = () => {
+    navigation.navigate(CarePetRoutes.MAIN_CARE_PET);
+  };
   const InsertUrl = (url) => {
     setImgUrl(url);
   };
@@ -37,7 +39,11 @@ const AddphotoScreen = ({ navigation, route }) => {
           onChangeText={(text) => setCharater(text.trim())}
         />
         <View style={styles.containerRow}>
-          <SquareButton colorType={ColorTypes.YELLOW} text="등록하기" />
+          <SquareButton
+            colorType={ColorTypes.YELLOW}
+            text="등록하기"
+            onPress={onPress}
+          />
         </View>
       </View>
     </View>

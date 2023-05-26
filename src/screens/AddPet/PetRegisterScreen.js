@@ -31,6 +31,7 @@ const PetRegisterScreen = ({ navigation, route }) => {
     };
     setList((prev) => [newPet, ...prev]);
     navigation.navigate(AddPetRoutes.LIST, { list: list, newPet: newPet });
+    setImgUrl(null);
   };
 
   const InsertUrl = (url) => {

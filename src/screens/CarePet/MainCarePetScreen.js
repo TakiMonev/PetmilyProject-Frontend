@@ -12,7 +12,7 @@ import ListRearerScreen from './Rearer/ListRearerScreen';
 import { CarePetRoutes } from '../../navigations/routes';
 
 const MainCarePetScreen = ({ navigation }) => {
-  const [content, setContent] = useState('사진첩');
+  const [content, setContent] = useState('일정');
   const [schdule, setSchdule] = useState('');
   const [health, setHealth] = useState(null);
   const [photo, setPhoto] = useState(true);
@@ -23,10 +23,15 @@ const MainCarePetScreen = ({ navigation }) => {
       return navigation.navigate(CarePetRoutes.ADD_PHOTO);
     } else if (content === '일정') {
       return navigation.navigate(CarePetRoutes.ADD_SCHDULE);
+    } else if (content === '양육자') {
+      return navigation.navigate(CarePetRoutes.ADD_SCHDULE);
     }
   };
   const onPress = () => {
     navigation.navigate(CarePetRoutes.VIEW_PHOTO);
+  };
+  const onChangeContent = (Content) => {
+    setContent(Content);
   };
 
   const renderScreen = () => {
@@ -41,13 +46,13 @@ const MainCarePetScreen = ({ navigation }) => {
     } else if (content === '양육자') {
       return rearer === null ? <EmptyRearerScreen /> : <ListRearerScreen />;
     } else {
-      return null; // Return null or another default screen/component if needed
+      return null;
     }
   };
 
   return (
     <View style={styles.container}>
-      <CarePetList onAddPress={onAddPress} />
+      <CarePetList onChangeContent={onChangeContent} onAddPress={onAddPress} />
       <View style={styles.container2}>{renderScreen()}</View>
     </View>
   );

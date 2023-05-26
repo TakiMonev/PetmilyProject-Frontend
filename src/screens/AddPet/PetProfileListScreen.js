@@ -72,11 +72,14 @@ const PetProfileListScreen = ({ navigation }) => {
       console.log('Error fetching pet image:', error);
     }
   };
+  const onAddPress = () => {
+    navigation.navigate(AddPetRoutes.REGISTER);
+  };
 
   return (
     <>
       <View style={styles.container}>
-        <ComponentAMD onPress={AddPress} navigation={navigation} />
+        <ComponentAMD onAddPress={onAddPress} navigation={navigation} />
       </View>
 
       <ScrollView style={styles.scroll}>

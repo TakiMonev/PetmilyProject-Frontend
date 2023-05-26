@@ -7,7 +7,13 @@ import { YELLOW } from '../../../colors';
 import ComponentAMD from '../../../components/ComponentAMD';
 import { CarePetRoutes } from '../../../navigations/routes';
 
-const CarePetList = ({ navigation, content, subconst, onAddPress }) => {
+const CarePetList = ({
+  navigation,
+  content,
+  subconst,
+  onAddPress,
+  onChangePress,
+}) => {
   const [schdueltextColor, setSchduleTextColor] = useState(YELLOW.DARK);
   const [phototextColor, setPhotoTextColor] = useState(BLACK);
   const [rearertextColor, setRearerTextColor] = useState(BLACK);
