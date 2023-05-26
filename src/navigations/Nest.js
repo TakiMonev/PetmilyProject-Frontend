@@ -21,6 +21,7 @@ import AddphotoScreen from '../screens/CarePet/Photo/AddPhotoScreen';
 import ViewPhotoScreen from '../screens/CarePet/Photo/ViewPhotoScreen';
 import EmptyPhotoSceen from '../screens/CarePet/Photo/EmptyPhotoScreen';
 import ListPhotoScreen from '../screens/CarePet/Photo/ListPhotoScreen';
+import ViewCalender from '../screens/Calender/ViewCalender';
 
 const TabStack = createBottomTabNavigator();
 const AddPetStack = createStackNavigator();
@@ -30,7 +31,9 @@ const AddPetScheduleStack = createStackNavigator();
 const UserInfoStack = createStackNavigator();
 
 export const AuthContext = createContext();
+export const PetContext = createContext();
 
+//로그인 로그아웃
 export const AuthProvider = ({ children }) => {
   const [isSignedIn, setIsSignedIn] = useState(false);
 
@@ -191,7 +194,7 @@ const TabStackScreen = () => {
   return (
     <AuthContext.Provider value={authContext}>
       <TabStack.Navigator>
-        <TabStack.Screen name="펫정보" component={HomeScreen} />
+        <TabStack.Screen name="펫정보" component={ViewCalender} />
         <TabStack.Screen name="일정" component={AddPetStackScreen} />
         <TabStack.Screen
           name="메인"
