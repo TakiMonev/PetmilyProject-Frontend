@@ -9,31 +9,21 @@ import { CarePetRoutes } from '../../../navigations/routes';
 
 const CarePetList = ({ navigation, content, subconst, onAddPress }) => {
   const [schdueltextColor, setSchduleTextColor] = useState(YELLOW.DARK);
-  const [healthtextColor, setHealthTextColor] = useState(BLACK);
   const [phototextColor, setPhotoTextColor] = useState(BLACK);
   const [rearertextColor, setRearerTextColor] = useState(BLACK);
 
   const onSchdulePress = () => {
     setSchduleTextColor(YELLOW.DARK);
-    setHealthTextColor(BLACK);
-    setPhotoTextColor(BLACK);
-    setRearerTextColor(BLACK);
-  };
-  const onHelathPress = () => {
-    setSchduleTextColor(BLACK);
-    setHealthTextColor(YELLOW.DARK);
     setPhotoTextColor(BLACK);
     setRearerTextColor(BLACK);
   };
   const onPhotoPress = () => {
     setSchduleTextColor(BLACK);
-    setHealthTextColor(BLACK);
     setPhotoTextColor(YELLOW.DARK);
     setRearerTextColor(BLACK);
   };
   const onRearePress = () => {
     setSchduleTextColor(BLACK);
-    setHealthTextColor(BLACK);
     setPhotoTextColor(BLACK);
     setRearerTextColor(YELLOW.DARK);
   };
@@ -73,7 +63,7 @@ const CarePetList = ({ navigation, content, subconst, onAddPress }) => {
         </View>
       </View>
       <View style={styles.componentAMD}>
-        <ComponentAMD />
+        <ComponentAMD onAddPress={onAddPress} />
       </View>
     </View>
   );

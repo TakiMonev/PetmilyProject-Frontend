@@ -1,4 +1,5 @@
 import { StyleSheet, Text, TextInput, View } from 'react-native';
+import { GRAY } from '../colors';
 
 const InputText = ({ title, placeholder, keyboardType, onChangeText }) => {
   return (
@@ -47,14 +48,14 @@ const styles = StyleSheet.create({
     width: 350,
     padding: 10,
     borderRadius: 10,
-    borderColor: '#a8a29e',
+    borderColor: GRAY.DEFAULT,
   },
   modify_input: {
     borderWidth: 1,
     width: 350,
     padding: 10,
     borderRadius: 10,
-    borderColor: '#a8a29e',
+    borderColor: GRAY.DEFAULT,
   },
 });
 
