@@ -5,41 +5,12 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { YELLOW } from '../colors';
 import { CarePetRoutes } from '../navigations/routes';
 
-// //등록 수정 삭제 아이콘
-// const ComponentAMD = ({ navigation, onPress }) => {
-//   return (
-//     <>
-//       <View style={styles.container}>
-//         <Pressable onPress={onPress}>
-//           <Entypo
-//             name="circle-with-plus"
-//             size={40}
-//             color={YELLOW.DEFAULT}
-//             onPress={() => {
-//               navigation.navigate(CarePetRoutes.ADD_SCHDULE);
-//             }}
-//           />
-//         </Pressable>
-//         <MaterialCommunityIcons
-//           name="pencil-circle"
-//           size={40}
-//           color={YELLOW.DEFAULT}
-//         />
-//         <MaterialCommunityIcons
-//           name="delete-circle"
-//           size={40}
-//           color={YELLOW.DEFAULT}
-//         />
-//       </View>
-//     </>
-//   );
-// };
 //등록 수정 삭제 아이콘
-const ComponentAMD = ({ navigation, onPress }) => {
+const ComponentAMD = ({ navigation, onAddPress }) => {
   return (
     <>
       <View style={styles.container}>
-        <Pressable onPress={onPress}>
+        <Pressable onPress={onAddPress}>
           <Entypo name="circle-with-plus" size={40} color={YELLOW.DEFAULT} />
         </Pressable>
         <MaterialCommunityIcons

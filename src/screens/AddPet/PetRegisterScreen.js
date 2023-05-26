@@ -11,7 +11,7 @@ import 'react-native-get-random-values';
 import { nanoid } from 'nanoid';
 
 const PetRegisterScreen = ({ navigation, route }) => {
-  const [imgUrl, setImgUrl] = useState('');
+  const [imgUrl, setImgUrl] = useState(null);
   const [name, setName] = useState('멍멍이');
   const [gender, setGender] = useState('');
   const [species, setSpecies] = useState('');
@@ -35,17 +35,16 @@ const PetRegisterScreen = ({ navigation, route }) => {
 
   const InsertUrl = (url) => {
     setImgUrl(url);
-    console.log(imgUrl);
   };
 
   return (
     <View style={styles.container}>
       <View style={styles.photoContainer}>
         <View style={styles.rowContainer}>
-          {imgUrl !== null ? (
+          {imgUrl === null ? (
             <View style={styles.photoBox}></View>
           ) : (
-            <Image source={{ uri: imgUrl }} />
+            <Image source={{ uri: imgUrl }} style={styles.image} />
           )}
           <View style={{ marginTop: 130, marginLeft: -30 }}>
             <ImagePickerComponent
@@ -138,6 +137,11 @@ const styles = StyleSheet.create({
   name: {
     fontSize: 20,
     textAlign: 'center',
+  },
+  image: {
+    borderRadius: 10,
+    width: 150,
+    height: 150,
   },
 });
 

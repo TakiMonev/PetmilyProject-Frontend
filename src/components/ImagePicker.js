@@ -8,7 +8,7 @@ import * as ImagePicker from 'expo-image-picker';
 import { WHITE } from '../colors';
 //import { ImageContext } from '../context/LoginContext';
 
-export const ImagePickerComponent = ({ width, height }) => {
+export const ImagePickerComponent = ({ width, height, InsertUrl }) => {
   const [imageUrl, setImageUrl] = useState('');
   const [status, requestPermission] = ImagePicker.useMediaLibraryPermissions();
   const [upload, setUpload] = useState(false);
@@ -31,6 +31,7 @@ export const ImagePickerComponent = ({ width, height }) => {
       return null;
     } else {
       setImageUrl(result.assets[0].uri);
+      InsertUrl(result.assets[0].uri);
       setUpload(true);
     }
   };

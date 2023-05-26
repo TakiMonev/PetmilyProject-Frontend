@@ -1,33 +1,43 @@
-import { Text, View, StyleSheet, TextInput, Button } from 'react-native';
+import { Text, View, StyleSheet, TextInput, Button, Image } from 'react-native';
 import ImagePickerComponent from '../../../components/ImagePicker';
 import { CarePetRoutes } from '../../../navigations/routes';
 import DatePicker from '../../../components/DatePicker';
 import TimePicker from '../../../components/TimePicker';
+import InputText from '../../../components/InputText';
+import { GRAY } from '../../../colors';
+import { useState } from 'react';
+import SquareButton, { ColorTypes } from '../../../components/Button';
 
 const AddphotoScreen = ({ navigation, route }) => {
+  const [imgUrl, setImgUrl] = useState(null);
+
+  const InsertUrl = (url) => {
+    setImgUrl(url);
+  };
   return (
     <View style={styles.container}>
-      <View style={styles.container2}>
-        <View style={styles.box}>
-          <Text style={styles.title}>날짜</Text>
-          <DatePicker />
-        </View>
-        <View style={styles.box}>
-          <Text style={styles.title}>시간</Text>
-          <TimePicker />
-        </View>
-      </View>
-
       <View style={styles.container3}>
-        <ImagePickerComponent />
-        <TextInput placeholder="메모" style={styles.memobox}></TextInput>
+        {imgUrl === null ? (
+          <View style={styles.photoBox}></View>
+        ) : (
+          <Image source={{ uri: imgUrl }} style={styles.image} />
+        )}
+        <View style={{ marginTop: -28, marginLeft: 300 }}>
+          <ImagePickerComponent width={50} height={50} InsertUrl={InsertUrl} />
+        </View>
+        <View>
+          <Text style={styles.title}>날짜</Text>
+          <View style={styles.box}>
+            <DatePicker />
+          </View>
+        </View>
+        <InputText
+          title="메모"
+          placeholder={'선택사항'}
+          onChangeText={(text) => setCharater(text.trim())}
+        />
         <View style={styles.containerRow}>
-          <Button
-            style={styles.Button}
-            title="등록"
-            onPress={() => navigation.navigate(CarePetRoutes.LIST_PHOTO)}
-          ></Button>
-          <Button title="취소"></Button>
+          <SquareButton colorType={ColorTypes.YELLOW} text="등록하기" />
         </View>
       </View>
     </View>
@@ -40,6 +50,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     width: '100%',
+    marginTop: 20,
   },
   container2: {
     flex: 1,
@@ -57,14 +68,23 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  box: {
-    flexDirection: 'row',
-    margin: 10,
-    borderStyle: 'solid',
-    borderRadius: 10,
-    borderWidth: 1,
-    width: '70%',
+  photoBox: {
+    width: 350,
+    height: 200,
     padding: 10,
+    backgroundColor: GRAY.LIGHT,
+  },
+  image: {
+    width: 350,
+    height: 200,
+    padding: 10,
+  },
+  box: {
+    borderWidth: 1,
+    width: 350,
+    padding: 10,
+    borderRadius: 10,
+    borderColor: GRAY.DEFAULT,
   },
 
   memobox: {
@@ -78,8 +98,12 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   title: {
-    marginRight: 20,
+    alignItems: 'flex-start',
+    marginBottom: 5,
+    fontSize: 16,
   },
-  Button: {},
+  imagePicker: {
+    marginTop: -20,
+  },
 });
 export default AddphotoScreen;
