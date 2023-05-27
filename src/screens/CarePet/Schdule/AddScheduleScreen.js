@@ -16,6 +16,8 @@ const AddScheduleScreen = ({ navigation, route }) => {
   const [petName, setPetName] = useState('');
 
   const handleScheduleSubmit = () => {
+    setPetName('초코');
+
     // 서버에 일정 데이터를 POST 요청으로 보냄
     AsyncStorage.getItem('inviter')
       .then((inviter) => {

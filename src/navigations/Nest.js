@@ -55,16 +55,6 @@ const AddPetStackScreen = () => {
     <AddPetStack.Navigator>
       {/* AddPet */}
       <AddPetStack.Screen
-        name={AddPetRoutes.EMPTY}
-        component={EmptyPetProfileScreen}
-        options={{ headerShown: false }}
-      />
-      <AddPetStack.Screen
-        name={AddPetRoutes.REGISTER}
-        component={PetRegisterScreen}
-        options={{ title: '펫등록' }}
-      />
-      <AddPetStack.Screen
         name={AddPetRoutes.LIST}
         component={PetProfileListScreen}
         options={{ title: '메인' }}
